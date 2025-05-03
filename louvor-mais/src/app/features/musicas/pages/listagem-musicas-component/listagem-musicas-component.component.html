@@ -1,5 +1,17 @@
 <header class="header">
-    <app-botao-voltar></app-botao-voltar>
-    <app-pesquisa-component></app-pesquisa-component>
+    <div class="div-header">
+        <app-botao-voltar></app-botao-voltar>
+        <button class="criar-button">Criar</button>    
+    </div>
+
+    <app-pesquisa-component></app-pesquisa-component>    
 </header>
-<app-nenhuma-musica-content></app-nenhuma-musica-content>
+<app-nenhuma-musica-content *ngIf="!carregando && musicas.length === 0"></app-nenhuma-musica-content>
+
+<div class="music-list" *ngIf="!carregando && musicas.length > 0">
+    <app-musica
+        *ngFor="let musica of musicas"
+        [dados]="musica">
+    >
+    </app-musica>
+</div>
