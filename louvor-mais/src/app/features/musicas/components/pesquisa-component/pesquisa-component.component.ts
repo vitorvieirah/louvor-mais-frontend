@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-pesquisa-component',
@@ -8,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './pesquisa-component.component.scss'
 })
 export class PesquisaComponent {
+  @Output() textoBusca = new EventEmitter<string>();
 
+  onInput(event: Event) {
+    const texto = (event.target as HTMLInputElement).value;
+    this.textoBusca.emit(texto);
+  }
 }

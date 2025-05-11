@@ -1,0 +1,51 @@
+.form-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.textarea-field {
+    border: none;
+    background-color: #f0f0f0;
+    padding: 12px;
+    font-size: 16px;
+    min-height: 150px;
+    outline: none;
+    resize: none;
+    border-radius: 4px;
+}
+
+.save-button {
+    background-color: #4a4aff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    -webkit-tap-highlight-color: transparent;
+    align-self: center;
+    width: 200px;
+}
+
+.save-button:active {
+    background-color: #3a3aff;
+    transform: scale(0.98);
+}

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Musica } from '../../models/musica.model';
 
 @Component({
@@ -12,6 +12,8 @@ export class MusicaComponent {
   @Input() dados!: Musica;
   link?: string;
 
+  @Output() linkCopiado = new EventEmitter<void>();
+
   ngOnInit() {
     if (this.dados) {
       this.link = this.dados.link; 
@@ -23,6 +25,7 @@ export class MusicaComponent {
       navigator.clipboard.writeText(this.link)
         .then(() => {
           console.log('Texto copiado com sucesso!');
+          this.linkCopiado.emit();
         })
         .catch(err => {
           console.error('Erro ao copiar texto: ', err);

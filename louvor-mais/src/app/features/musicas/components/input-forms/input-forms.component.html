@@ -1,0 +1,11 @@
+<div class="form-group">
+  <input
+    type="text"
+    class="input-field"
+    [placeholder]="placeholder"
+    (input)="onInput(inputRef.value)"
+    (blur)="onTouched()"
+    [value]="value"
+    #inputRef
+  />
+</div>

@@ -1,17 +1,27 @@
 <header class="header">
     <div class="div-header">
         <app-botao-voltar></app-botao-voltar>
-        <button class="criar-button">Criar</button>    
+        <button *ngIf="musicas.length > 0" class="criar-button">Criar</button>    
     </div>
 
-    <app-pesquisa-component></app-pesquisa-component>    
+    <app-pesquisa-component (textoBusca)="filtrarMusicas($event)"></app-pesquisa-component>    
 </header>
-<app-nenhuma-musica-content *ngIf="!carregando && musicas.length === 0"></app-nenhuma-musica-content>
+<app-nenhuma-musica-content *ngIf="musicas.length === 0 && !pesquisando"></app-nenhuma-musica-content>
 
-<div class="music-list" *ngIf="!carregando && musicas.length > 0">
+<div class="nenhum-resultado" *ngIf="musicas.length === 0 && pesquisando">
+  Nenhuma música encontrada para sua busca.
+</div>
+
+<div class="music-list" *ngIf="musicas.length > 0">
     <app-musica
         *ngFor="let musica of musicas"
-        [dados]="musica">
+        [dados]="musica"
+        (linkCopiado)="mostrarNotificacao()"
+        >
     >
     </app-musica>
+</div>
+
+<div class="notificacao" *ngIf="notificacaoVisivel">
+  Link copiado com sucesso!
 </div>

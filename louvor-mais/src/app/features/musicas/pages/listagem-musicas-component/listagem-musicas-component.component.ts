@@ -17,71 +17,48 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './listagem-musicas-component.component.scss'
 })
 export class ListagemMusicasComponent implements OnInit {
-  musicas: Musica[] = [
-    {
-      id: '1',
-      nome: 'Música 1',
-      tom: 'C',
-      versao: 'Versão 1',
-      dificuldade: 'Fácil',
-      link: 'https://link1.com',
-      cifra: 'Cifra 1'
-    },
-    {
-      id: '2',
-      nome: 'Música 2',
-      tom: 'D',
-      versao: 'Versão 2',
-      dificuldade: 'Média',
-      link: 'https://link2.com',
-      cifra: 'Cifra 2'
-    },
-    {
-      id: '3',
-      nome: 'Música 3',
-      tom: 'G',
-      versao: 'Versão 3',
-      dificuldade: 'Difícil',
-      link: 'https://link3.com',
-      cifra: 'Cifra 3'
-    },
-    {
-      id: '4',
-      nome: 'Música 4',
-      tom: 'A',
-      versao: 'Versão 4',
-      dificuldade: 'Fácil',
-      link: 'https://link4.com',
-      cifra: 'Cifra 4'
-    },
-    {
-      id: '5',
-      nome: 'Música 5',
-      tom: 'E',
-      versao: 'Versão 5',
-      dificuldade: 'Média',
-      link: 'https://link5.com',
-      cifra: 'Cifra 5'
-    }
-  ];
+  musicas: Musica[] = [];
+  todasMusicas: Musica[] = [];
+  notificacaoVisivel = false;
   carregando = false;
+  pesquisando = false;
 
-  // constructor(private musicaService: MusicaService) {}
+  constructor(private musicaService: MusicaService) { }
 
   ngOnInit(): void {
-    // this.carregarMusicas();
+    this.carregarMusicas();
   }
 
   carregarMusicas(): void {
-    // this.musicaService.listar().subscribe({
-    //   next: (res) => {
-    //     this.musicas = res.items;
-    //     this.carregando = false;
-    //   },
-    //   error: (err) => {
-    //     console.error('Erro ao carregar músicas', err);
-    //     this.carregando = false;
-    //   }
-    // });
+    this.carregando = true;
+    this.musicaService.listar().subscribe({
+      next: (res) => {
+        this.todasMusicas = res.dado.content;
+        this.musicas = [...this.todasMusicas];
+        this.carregando = false;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar músicas', err);
+        this.carregando = false;
+      }
+    });
+  }
+
+  mostrarNotificacao() {
+    this.notificacaoVisivel = true;
+    setTimeout(() => this.notificacaoVisivel = false, 2000);
+  }
+
+  filtrarMusicas(texto: string) {
+    const termo = texto.trim().toLowerCase();
+    this.pesquisando = termo.length > 0;
+
+    this.musicas = this.todasMusicas.filter(m =>
+      m.nome.toLowerCase().includes(termo) ||
+      m.tom.toLowerCase().includes(termo) ||
+      m.versao.toLowerCase().includes(termo) ||
+      m.dificuldade.toLowerCase().includes(termo)
+    );
   }
 }
+

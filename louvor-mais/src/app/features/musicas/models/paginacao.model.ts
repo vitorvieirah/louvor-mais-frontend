@@ -1,5 +1,5 @@
 export interface Paginacao<T> {
-    items: T[];
+    content: T[];
     totalPages: number;
     currentPage: number;
     totalItems: number;
