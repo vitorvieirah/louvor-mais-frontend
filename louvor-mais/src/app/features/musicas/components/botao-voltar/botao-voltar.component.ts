@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-botao-voltar',
@@ -9,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class BotaoVoltarComponent {
 
+  @Input() url: string = '';
+
+  constructor(private router: Router) {}
+
+  voltar() {
+    this.router.navigate([this.url]);  
+  }
 }

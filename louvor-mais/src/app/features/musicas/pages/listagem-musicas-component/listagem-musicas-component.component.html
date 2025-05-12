@@ -1,7 +1,7 @@
 <header class="header">
     <div class="div-header">
         <app-botao-voltar></app-botao-voltar>
-        <button *ngIf="musicas.length > 0" class="criar-button">Criar</button>    
+        <button *ngIf="musicas.length > 0" class="criar-button"  (click)="telaCriar()">Criar</button>    
     </div>
 
     <app-pesquisa-component (textoBusca)="filtrarMusicas($event)"></app-pesquisa-component>    

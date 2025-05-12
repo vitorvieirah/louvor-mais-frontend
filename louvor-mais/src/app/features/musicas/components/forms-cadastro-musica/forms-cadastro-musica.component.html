@@ -1,11 +1,24 @@
-<form class="form-container" (ngSubmit)="salvar()">
+<form class="form-container" #form="ngForm" (ngSubmit)="salvar(form)">
     <app-input-forms placeholder="Nome da música" [(ngModel)]="musica.nome" name="nome"></app-input-forms>
 
-    <app-input-forms placeholder="Tom da música" [(ngModel)]="musica.tom" name="tom"></app-input-forms>
+    <app-select-input-component
+        placeholder="Tom da música"
+        [(ngModel)]="musica.tom"
+        name="tom"
+        [options]="tons"
+        required
+        >
+    ></app-select-input-component>
 
     <app-input-forms placeholder="Versão da música" [(ngModel)]="musica.versao" name="versao"></app-input-forms>
 
-    <app-input-forms placeholder="Dificuldade" [(ngModel)]="musica.dificuldade" name="dificuldade"></app-input-forms>
+    <app-select-input-component
+        placeholder="Dificuldade"
+        [(ngModel)]="musica.dificuldade"
+        name="dificuldade"
+        [options]="dificuldades"
+        >
+    ></app-select-input-component>
 
     <app-input-forms placeholder="Link da música" [(ngModel)]="musica.link" name="link"></app-input-forms>
 

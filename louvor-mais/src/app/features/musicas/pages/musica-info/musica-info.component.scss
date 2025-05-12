@@ -1,0 +1,80 @@
+.app-container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.header {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 10px;
+}
+
+.edit-button,
+.delete-button {
+    background-color: #4a4aff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.delete-button {
+    background-color: #4a4aff;
+}
+
+.edit-button:active,
+.delete-button:active {
+    transform: scale(0.98);
+}
+
+.music-title {
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 20px 20px;
+    color: #333;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    text-decoration: underline;
+}
+
+.technical-data {
+    background-color: #f0f0f0;
+    padding: 15px;
+}
+
+.data-item {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #333;
+}

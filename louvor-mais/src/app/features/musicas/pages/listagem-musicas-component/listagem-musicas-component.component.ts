@@ -7,6 +7,7 @@ import { MusicaService } from '../../services/musica.service';
 import { MusicaComponent } from '../../components/musica/musica.component';
 import { CommonModule, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listagem-musicas-component',
@@ -23,7 +24,7 @@ export class ListagemMusicasComponent implements OnInit {
   carregando = false;
   pesquisando = false;
 
-  constructor(private musicaService: MusicaService) { }
+  constructor(private musicaService: MusicaService, private router: Router) { }
 
   ngOnInit(): void {
     this.carregarMusicas();
@@ -59,6 +60,10 @@ export class ListagemMusicasComponent implements OnInit {
       m.versao.toLowerCase().includes(termo) ||
       m.dificuldade.toLowerCase().includes(termo)
     );
+  }
+
+  telaCriar() {
+    this.router.navigate(["/cadastro-musica"]); 
   }
 }
 

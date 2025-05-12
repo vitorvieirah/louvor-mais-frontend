@@ -1,6 +1,13 @@
 <header class="header">
-    <app-botao-voltar></app-botao-voltar>
+    <app-botao-voltar url="/musicas"></app-botao-voltar>
     <h1 class="header-title">Cadastro de música</h1>
 </header>
+<main>
+    <app-forms-cadastro-musica
+        (musicaSalva)="mostrarNotificacao()"
+    ></app-forms-cadastro-musica>
+</main>
 
-<app-forms-cadastro-musica></app-forms-cadastro-musica>
+<div class="notificacao" *ngIf="notificacaoVisivel">
+  Música sala com sucesso !
+</div>
