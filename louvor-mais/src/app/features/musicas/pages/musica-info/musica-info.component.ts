@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BotaoVoltarComponent } from '../../components/botao-voltar/botao-voltar.component';
+import { Musica } from '../../models/musica.model';
 
 @Component({
   selector: 'app-musica-info',
@@ -9,5 +10,5 @@ import { BotaoVoltarComponent } from '../../components/botao-voltar/botao-voltar
   styleUrl: './musica-info.component.scss'
 })
 export class MusicaInfoComponent {
-
+    @Input() dados!: Musica;
 }

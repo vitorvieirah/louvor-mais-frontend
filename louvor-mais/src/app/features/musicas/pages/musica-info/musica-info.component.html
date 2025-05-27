@@ -1,21 +1,19 @@
-<div class="page-wrapper">
-    <header class="header">
-        <app-botao-voltar url="/musicas"></app-botao-voltar>
-        <div class="action-buttons">
-            <button class="edit-button">Editar</button>
-            <button class="delete-button">Excluir</button>
-        </div>
-    </header>
-    <main class="app-container">
-        <h1 class="music-title">Bondade de Deus</h1>
-        <div class="section technical-data">
-            <h2 class="section-title">Dados técnicos</h2>
-            <p class="data-item">Versão da música: Isaias Saad</p>
-            <p class="data-item">Tom da música: G</p>
-            <p class="data-item">Link da música:</p> <a href="https://linkdamusica.com"><span
-                    class="link">https://linkdamusica.com</span></a>
-            <p class="data-item">Cifra da música:</p> <a href="https://ciframusica.com"><span
-                    class="link">https://ciframusica.com</span></a>
-        </div>
-    </main>
-</div>
+<header class="header">
+    <app-botao-voltar url="/musicas"></app-botao-voltar>
+    <div class="action-buttons">
+        <button class="edit-button">Editar</button>
+        <button class="delete-button">Excluir</button>
+    </div>
+</header>
+<main class="app-container">
+    <h1 class="music-title">{{dados.titulo}}</h1>
+    <div class="section technical-data">
+        <h2 class="section-title">Dados técnicos</h2>
+        <p class="data-item">Versão da música: {{dados.versao}}</p>
+        <p class="data-item">Tom da música: {{dados.tom}}</p>
+        <p class="data-item">Link da música:</p> <a href="https://linkdamusica.com"><span
+                class="link">{{dados.link}}</span></a>
+        <p class="data-item">Cifra da música:</p> <a href="https://ciframusica.com"><span
+                class="link">{{dados.cifra}}</span></a>
+    </div>
+</main>
