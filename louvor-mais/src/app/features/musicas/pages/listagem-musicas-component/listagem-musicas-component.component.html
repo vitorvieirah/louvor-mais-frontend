@@ -17,6 +17,7 @@
         *ngFor="let musica of musicas"
         [dados]="musica"
         (linkCopiado)="mostrarNotificacao()"
+        (musicaClicada)="abrirMusicaInfo($event)"
         >
     >
     </app-musica>

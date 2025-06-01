@@ -65,5 +65,9 @@ export class ListagemMusicasComponent implements OnInit {
   telaCriar() {
     this.router.navigate(["/cadastro-musica"]); 
   }
+
+  abrirMusicaInfo(musica: Musica) {
+    this.router.navigate(['/musica'], { state: { musica } });
+  }
 }
 

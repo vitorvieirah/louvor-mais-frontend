@@ -10,13 +10,14 @@ import { Musica } from '../../models/musica.model';
 })
 export class MusicaComponent {
   @Input() dados!: Musica;
+  @Output() musicaClicada = new EventEmitter<any>();
   link?: string;
 
   @Output() linkCopiado = new EventEmitter<void>();
 
   ngOnInit() {
     if (this.dados) {
-      this.link = this.dados.link; 
+      this.link = this.dados.link;
     }
   }
 
@@ -31,5 +32,9 @@ export class MusicaComponent {
           console.error('Erro ao copiar texto: ', err);
         });
     }
+  }
+
+  onMusicaClick() {
+    this.musicaClicada.emit(this.dados);
   }
 }
