@@ -25,9 +25,22 @@ export class MusicaService {
         return this.http.get<ResponseDto<Paginacao<Musica>>>(this.URL_API, { params });
     }
 
+    listarPorId(id: string): Observable<ResponseDto<Musica>> {
+        return this.http.get<ResponseDto<Musica>>(`${this.URL_API}/${id}`);
+    }
+
     cadastrar(novaMusica: Musica): Observable<ResponseDto<Musica>> {
         console.log('Nova música: ', novaMusica);
         return this.http.post<ResponseDto<Musica>>(this.URL_API, novaMusica);    
+    }
+
+    excluirMusica(id: string): Observable<any> {
+        return this.http.delete<void>(`${this.URL_API}/${id}`);
+    }
+
+    atualizarMusica(musica: Musica): Observable<ResponseDto<Musica>> {
+        console.log(musica);
+        return this.http.put<ResponseDto<Musica>>(`${this.URL_API}/${musica.id_musica}`, musica);
     }
 
 }

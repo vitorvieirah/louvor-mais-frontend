@@ -1,8 +1,8 @@
 <header class="header">
     <app-botao-voltar url="/musicas"></app-botao-voltar>
     <div class="action-buttons">
-        <button class="edit-button">Editar</button>
-        <button class="delete-button">Excluir</button>
+        <button (click)="abrirModalEditar()" class="edit-button">Editar</button>
+        <button (click)="abrirModalDeletar()" class="delete-button">Excluir</button>
     </div>
 </header>
 <main class="app-container">
@@ -16,5 +16,7 @@
         <p class="data-item">Cifra da música:</p> <a href="https://ciframusica.com"><span
                 class="link">{{dados.cifra}}</span></a>
     </div>
-    <app-modal-deletar **ngIf=""></app-modal-deletar>
+    <app-modal-deletar *ngIf="modalDeletar" (fecharModal)="fecharModalDeletar()" (confirmarExclusao)="excluirMusica()"></app-modal-deletar>
+    <app-modal-editar *ngIf="modalEditar" [musica]="dados" (fecharModal)="fecharModalEditar()" (musicaAtualizada)="atualizarDados()"></app-modal-editar>
+    
 </main>

@@ -1,23 +1,32 @@
-import { InputFormsComponent } from './../input-forms/input-forms.component';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { Musica } from '../../models/musica.model';
 import { MusicaService } from '../../services/musica.service';
+import { InputFormsComponent } from '../input-forms/input-forms.component';
 import { SelectInputComponentComponent } from '../select-input-component/select-input-component.component';
 
 @Component({
-  selector: 'app-forms-cadastro-musica',
+  selector: 'app-modal-editar',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, InputFormsComponent, HttpClientModule, SelectInputComponentComponent],
-  templateUrl: './forms-cadastro-musica.component.html',
-  styleUrl: './forms-cadastro-musica.component.scss'
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, InputFormsComponent, SelectInputComponentComponent],
+  templateUrl: './modal-editar.component.html',
+  styleUrl: './modal-editar.component.scss'
 })
-export class FormsCadastroMusicaComponent {
+export class ModalEditarComponent implements OnInit {
+  @Input() musica!: Musica;
+  @Output() fecharModal = new EventEmitter<void>();
+  @Output() musicaAtualizada = new EventEmitter<void>();
 
-  constructor(private musicaService: MusicaService) { }
-
-  @Output() musicaSalva = new EventEmitter<void>();
+  musicaEditada: Musica = {
+    id_musica: '',
+    nome: '',
+    tom: '',
+    versao: '',
+    dificuldade: '',
+    link: '',
+    cifra: ''
+  };
 
   tons = [
     { value: 'C', label: 'C (Dó)' },
@@ -52,40 +61,36 @@ export class FormsCadastroMusicaComponent {
     { value: 'DIFICIL', label: 'Difícil' }
   ];
 
-  musica: Musica = {
-    id_musica: '',
-    nome: '',
-    tom: '',
-    versao: '',
-    dificuldade: '', 
-    link: '',
-    cifra: ''
-  };
+  constructor(private musicaService: MusicaService) {}
 
-  salvar(form: any) {
-    // Garantir que estamos enviando os valores dos enums e não as descrições
-    const musicaParaSalvar = { ...this.musica };
-    
-    // Encontrar o valor do enum para o tom selecionado
-    const tomSelecionado = this.tons.find(t => t.value === this.musica.tom);
-    if (tomSelecionado) {
-      musicaParaSalvar.tom = tomSelecionado.value;
-    }
-
-    // Encontrar o valor do enum para a dificuldade selecionada
-    const dificuldadeSelecionada = this.dificuldades.find(d => d.value === this.musica.dificuldade);
-    if (dificuldadeSelecionada) {
-      musicaParaSalvar.dificuldade = dificuldadeSelecionada.value;
-    }
-
-    this.musicaService.cadastrar(musicaParaSalvar).subscribe({
-      next: () => {
-        console.log('Música criada com sucesso')
-        this.musicaSalva.emit();
-        form.resetForm();
-      },
-      error: (err) => console.error('Erro ao criar música', err)
-    });
+  ngOnInit(): void {
+    // Clonar o objeto para não modificar o original diretamente
+    this.musicaEditada = { ...this.musica };
   }
 
+  fechar(): void {
+    this.fecharModal.emit();
+  }
+
+  salvar(): void {
+    const tomSelecionado = this.tons.find(t => t.value === this.musica.tom);
+    if (tomSelecionado) {
+      this.musicaEditada.tom = tomSelecionado.value;
+    }
+
+  
+    const dificuldadeSelecionada = this.dificuldades.find(d => d.value === this.musica.dificuldade);
+    if (dificuldadeSelecionada) {
+      this.musicaEditada.dificuldade = dificuldadeSelecionada.value;
+    }
+
+    this.musicaService.atualizarMusica(this.musicaEditada).subscribe({
+      next: () => {
+        console.log('Música atualizada com sucesso');
+        this.musicaAtualizada.emit();
+        this.fecharModal.emit();
+      },
+      error: (err) => console.error('Erro ao atualizar música', err)
+    });
+  }
 }

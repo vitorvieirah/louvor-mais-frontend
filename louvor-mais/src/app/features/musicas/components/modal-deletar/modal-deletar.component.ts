@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal-deletar',
@@ -8,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './modal-deletar.component.scss'
 })
 export class ModalDeletarComponent {
+  @Output() fecharModal = new EventEmitter<void>();
+  @Output() confirmarExclusao = new EventEmitter<void>();
 
+  fechar() {
+    this.fecharModal.emit();
+  }
+
+  confirmar() {
+    this.confirmarExclusao.emit();
+  }
 }

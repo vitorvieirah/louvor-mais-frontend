@@ -1,5 +1,5 @@
 export interface Musica {
-    id: string;
+    id_musica: string;
     nome: string;
     tom: string;
     versao: string;

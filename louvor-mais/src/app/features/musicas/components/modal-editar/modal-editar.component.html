@@ -1,0 +1,41 @@
+<div class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Editar Música</h2>
+            <button class="close-button" (click)="fechar()">×</button>
+        </div>
+        <div class="modal-body">
+            <form class="form-container" #form="ngForm">
+                <app-input-forms placeholder="Nome da música" [(ngModel)]="musicaEditada.nome" name="nome"></app-input-forms>
+
+                <app-select-input-component
+                    placeholder="Tom da música"
+                    [(ngModel)]="musicaEditada.tom"
+                    name="tom"
+                    [options]="tons"
+                    required
+                    value=""
+                    >
+                ></app-select-input-component>
+
+                <app-input-forms placeholder="Versão da música" [(ngModel)]="musicaEditada.versao" name="versao"></app-input-forms>
+
+                <app-select-input-component
+                    placeholder="Dificuldade"
+                    [(ngModel)]="musicaEditada.dificuldade"
+                    name="dificuldade"
+                    [options]="dificuldades"
+                    >
+                ></app-select-input-component>
+
+                <app-input-forms placeholder="Link da música" [(ngModel)]="musicaEditada.link" name="link"></app-input-forms>
+
+                <app-input-forms placeholder="Cifra da música" [(ngModel)]="musicaEditada.cifra" name="cifra"></app-input-forms>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="cancel-button" (click)="fechar()">Cancelar</button>
+            <button class="save-button" (click)="salvar()">Salvar</button>
+        </div>
+    </div>
+</div>

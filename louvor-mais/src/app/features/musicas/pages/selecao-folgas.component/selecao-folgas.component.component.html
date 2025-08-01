@@ -1,0 +1,15 @@
+<section class="container">
+    <header class="header">
+        <h2>Folgas</h2>
+        <button class="proximo" [disabled]="selectedMusicas.length === 0" (click)="irParaMontagem()">Próximo</button>
+    </header>
+
+    <input type="text" class="search-bar" placeholder="Buscar música..." />
+
+    <div *ngFor="let musica of musicasFiltradas" class="musica-card" [class.selected]="isSelecionada(musica)"
+        (click)="toggleSelecao(musica)">
+        <h3>{{ musica.nome }}</h3>
+        <p><strong>Tom:</strong> {{ musica.tom }}</p>
+        <p><strong>Versão:</strong> {{ musica.versao }}</p>
+    </div>
+</section>
