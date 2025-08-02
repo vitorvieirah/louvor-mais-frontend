@@ -1,28 +1,57 @@
-<header class="header">
-    <div class="div-header">
+<div class="music-list-container">
+  <!-- Header modernizado -->
+  <header class="header">
+    <div class="header-content">
+      <div class="header-navigation">
         <app-botao-voltar></app-botao-voltar>
-        <button *ngIf="musicas.length > 0" class="criar-button"  (click)="telaCriar()">Criar</button>    
+        <div class="header-title">
+          <h1>🎵 Biblioteca Musical</h1>
+          <p *ngIf="musicas.length > 0">{{ musicas.length }} música{{ musicas.length !== 1 ? 's' : '' }} disponível{{ musicas.length !== 1 ? 'eis' : '' }}</p>
+        </div>
+      </div>
+      <button *ngIf="musicas.length > 0" class="btn-criar" (click)="telaCriar()">
+        <span class="btn-icon">➕</span>
+        Nova Música
+      </button>
+    </div>
+    
+    <!-- Barra de pesquisa melhorada -->
+    <div class="search-container" *ngIf="musicas.length > 0">
+      <app-pesquisa-component (textoBusca)="filtrarMusicas($event)"></app-pesquisa-component>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="main-content">
+    <!-- Estado vazio -->
+    <app-nenhuma-musica-content *ngIf="musicas.length === 0 && !pesquisando"></app-nenhuma-musica-content>
+    
+    <!-- Nenhum resultado de busca -->
+    <div class="no-results" *ngIf="musicas.length === 0 && pesquisando">
+      <div class="no-results-icon">🔍</div>
+      <h3>Nenhuma música encontrada</h3>
+      <p>Tente buscar com outros termos ou verifique a ortografia</p>
     </div>
 
-    <app-pesquisa-component (textoBusca)="filtrarMusicas($event)"></app-pesquisa-component>    
-</header>
-<app-nenhuma-musica-content *ngIf="musicas.length === 0 && !pesquisando"></app-nenhuma-musica-content>
-
-<div class="nenhum-resultado" *ngIf="musicas.length === 0 && pesquisando">
-  Nenhuma música encontrada para sua busca.
-</div>
-
-<div class="music-list" *ngIf="musicas.length > 0">
-    <app-musica
-        *ngFor="let musica of musicas"
+    <!-- Lista de músicas -->
+    <div class="music-grid" *ngIf="musicas.length > 0">
+      <app-musica
+        *ngFor="let musica of musicas;"
         [dados]="musica"
         (linkCopiado)="mostrarNotificacao()"
         (musicaClicada)="abrirMusicaInfo($event)"
-        >
-    >
-    </app-musica>
-</div>
+        class="music-card-wrapper">
+      </app-musica>
+    </div>
+  </main>
 
-<div class="notificacao" *ngIf="notificacaoVisivel">
-  Link copiado com sucesso!
+  <!-- Notificação modernizada -->
+  <div class="notification" 
+       [class.show]="notificacaoVisivel"
+       *ngIf="notificacaoVisivel">
+    <div class="notification-content">
+      <span class="notification-icon">✅</span>
+      <span class="notification-text">Link copiado com sucesso!</span>
+    </div>
+  </div>
 </div>

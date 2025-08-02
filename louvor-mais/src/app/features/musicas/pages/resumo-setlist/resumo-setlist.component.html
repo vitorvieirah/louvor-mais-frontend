@@ -1,0 +1,27 @@
+<section class="container">
+  <h2>Escolha a data</h2>
+  <input type="date" [(ngModel)]="dataSelecionada" class="calendar" />
+
+  <h3>Resumo do setlist</h3>
+  <p><strong>Setlist</strong> - {{ dataSelecionada | date: 'dd/MM' }}</p>
+
+  <div class="resumo-card">
+    <div>
+      <h4>Músicas</h4>
+      <ul>
+        <li *ngFor="let musica of musicas">{{ musica.nome }} - {{ musica.tom }}</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Escala</h4>
+      <ul>
+        <li *ngFor="let integrante of integrantes">{{ integrante.nome }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="botoes">
+    <button class="cancelar" (click)="cancelar()">Cancelar</button>
+    <button class="salvar" [disabled]="!dataSelecionada" (click)="salvar()">Salvar</button>
+  </div>
+</section>

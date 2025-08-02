@@ -1,22 +1,158 @@
-<header class="header">
-    <app-botao-voltar url="/musicas"></app-botao-voltar>
-    <div class="action-buttons">
-        <button (click)="abrirModalEditar()" class="edit-button">Editar</button>
-        <button (click)="abrirModalDeletar()" class="delete-button">Excluir</button>
+<div class="music-details-container">
+  <!-- Header modernizado -->
+  <header class="header">
+    <div class="header-content">
+      <div class="header-navigation">
+        <app-botao-voltar url="/musicas"></app-botao-voltar>
+        <div class="breadcrumb">
+          <span class="breadcrumb-item">Músicas</span>
+          <span class="breadcrumb-separator">›</span>
+          <span class="breadcrumb-current">{{ dados.nome }}</span>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button (click)="abrirModalEditar()" class="btn-edit" title="Editar música">
+          <span class="btn-icon">✏️</span>
+          Editar
+        </button>
+        <button (click)="abrirModalDeletar()" class="btn-delete" title="Excluir música">
+          <span class="btn-icon">🗑️</span>
+          Excluir
+        </button>
+      </div>
     </div>
-</header>
-<main class="app-container">
-    <h1 class="music-title">{{dados.nome}}</h1>
-    <div class="section technical-data">
-        <h2 class="section-title">Dados técnicos</h2>
-        <p class="data-item">Versão da música: {{dados.versao}}</p>
-        <p class="data-item">Tom da música: {{dados.tom}}</p>
-        <p class="data-item">Link da música:</p> <a href="https://linkdamusica.com"><span
-                class="link">{{dados.link}}</span></a>
-        <p class="data-item">Cifra da música:</p> <a href="https://ciframusica.com"><span
-                class="link">{{dados.cifra}}</span></a>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="main-content">
+    <!-- Cabeçalho da música -->
+    <div class="music-hero">
+      <div class="music-icon">🎵</div>
+      <h1 class="music-title">{{ dados.nome }}</h1>
+      <div class="music-quick-info">
+        <span class="info-badge info-tom">{{ dados.tom }}</span>
+        <span class="info-badge info-versao">{{ dados.versao }}</span>
+        <span class="info-badge info-dificuldade" [class]="'difficulty-' + dados.dificuldade?.toLowerCase()">
+          {{ dados.dificuldade }}
+        </span>
+      </div>
     </div>
-    <app-modal-deletar *ngIf="modalDeletar" (fecharModal)="fecharModalDeletar()" (confirmarExclusao)="excluirMusica()"></app-modal-deletar>
-    <app-modal-editar *ngIf="modalEditar" [musica]="dados" (fecharModal)="fecharModalEditar()" (musicaAtualizada)="atualizarDados()"></app-modal-editar>
-    
-</main>
+
+    <!-- Seções de informações -->
+    <div class="content-sections">
+      <!-- Dados Técnicos -->
+      <section class="info-section">
+        <div class="section-header">
+          <div class="section-icon">⚙️</div>
+          <h2 class="section-title">Dados Técnicos</h2>
+        </div>
+        <div class="section-content">
+          <div class="data-grid">
+            <div class="data-item">
+              <span class="data-label">Versão:</span>
+              <span class="data-value">{{ dados.versao }}</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label">Tom:</span>
+              <span class="data-value">{{ dados.tom }}</span>
+            </div>
+            <div class="data-item">
+              <span class="data-label">Dificuldade:</span>
+              <span class="data-value difficulty-text" [class]="'difficulty-' + dados.dificuldade?.toLowerCase()">
+                {{ dados.dificuldade }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Links e Recursos -->
+      <section class="info-section">
+        <div class="section-header">
+          <div class="section-icon">🔗</div>
+          <h2 class="section-title">Links e Recursos</h2>
+        </div>
+        <div class="section-content">
+          <div class="links-grid">
+            <div class="link-card" *ngIf="dados.link">
+              <div class="link-header">
+                <span class="link-icon">🎶</span>
+                <span class="link-title">Música Original</span>
+              </div>
+              <a [href]="dados.link" target="_blank" class="link-url" rel="noopener noreferrer">
+                {{ dados.link }}
+                <span class="external-icon">↗</span>
+              </a>
+              <button class="copy-link-btn" title="Copiar link">
+                📋
+              </button>
+            </div>
+
+            <div class="link-card" *ngIf="dados.cifra">
+              <div class="link-header">
+                <span class="link-icon">🎼</span>
+                <span class="link-title">Cifra da Música</span>
+              </div>
+              <a [href]="dados.cifra" target="_blank" class="link-url" rel="noopener noreferrer">
+                {{ dados.cifra }}
+                <span class="external-icon">↗</span>
+              </a>
+              <button class="copy-link-btn" title="Copiar cifra">
+                📋
+              </button>
+            </div>
+
+            <div class="empty-links" *ngIf="!dados.link && !dados.cifra">
+              <div class="empty-icon">🔗</div>
+              <p>Nenhum link adicionado ainda</p>
+              <button class="btn-add-link" (click)="abrirModalEditar()">
+                Adicionar links
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Informações Adicionais -->
+      <section class="info-section">
+        <div class="section-header">
+          <div class="section-icon">📋</div>
+          <h2 class="section-title">Informações Adicionais</h2>
+        </div>
+        <div class="section-content">
+          <div class="additional-info">
+            <div class="info-card">
+              <h4>Status da Música</h4>
+              <div class="status-indicator active">
+                <span class="status-dot"></span>
+                Ativa na biblioteca
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modais -->
+  <app-modal-deletar 
+    *ngIf="modalDeletar" 
+    (fecharModal)="fecharModalDeletar()" 
+    (confirmarExclusao)="excluirMusica()">
+  </app-modal-deletar>
+  
+  <app-modal-editar 
+    *ngIf="modalEditar" 
+    [musica]="dados" 
+    (fecharModal)="fecharModalEditar()" 
+    (musicaAtualizada)="atualizarDados()">
+  </app-modal-editar>
+
+  <!-- Notificação de link copiado -->
+  <div class="notification">
+    <div class="notification-content">
+      <span class="notification-icon">✅</span>
+      <span class="notification-text">Link copiado com sucesso!</span>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { Musica } from '../../models/musica.model';
 import { MusicaService } from '../../services/musica.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SetlistService } from '../../services/setlist.service';
 
 @Component({
   selector: 'app-selecao-musicas',
@@ -20,8 +21,8 @@ export class SelecaoMusicasComponent {
 
   constructor(
     private musicaService: MusicaService,
-    // private setlistService: SetlistService,
-    private router: Router
+    private router: Router,
+    private setlistService: SetlistService
   ) {}
 
   ngOnInit(): void {
@@ -57,8 +58,8 @@ export class SelecaoMusicasComponent {
   }
 
   irParaMontagem(): void {
-    // this.setlistService.setMusicas(this.selectedMusicas);
-    this.router.navigate(['/montar-setlist']);
+    this.setlistService.setMusicas(this.selectedMusicas);
+    this.router.navigate(['/integrantes-setlist']);
   }
 
   get musicasFiltradas(): Musica[] {

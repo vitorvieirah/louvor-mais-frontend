@@ -1,0 +1,111 @@
+<div class="menu-container">
+  <!-- Header modernizado -->
+  <header class="menu-header">
+    <div class="header-content">
+      <div class="header-title">
+        <h1>🎵 WorshipFlow</h1>
+        <p>Gerencie suas setlists com facilidade</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-primary" (click)="criarSetlist()">
+          <span class="btn-icon">➕</span>
+          Criar Setlist
+        </button>
+        <button class="btn-secondary" (click)="irParaMusicas()">
+          <span class="btn-icon">🎶</span>
+          Músicas
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="main-content">
+    <!-- Estado vazio quando não há setlists -->
+    <div *ngIf="setlists.length === 0" class="empty-state">
+      <div class="empty-icon">🎼</div>
+      <h3>Nenhuma setlist criada ainda</h3>
+      <p>Comece criando sua primeira setlist para organizar o louvor</p>
+      <button class="btn-primary" (click)="criarSetlist()">
+        Criar minha primeira setlist
+      </button>
+    </div>
+
+    <!-- Lista de setlists -->
+    <div class="setlists-grid" *ngIf="setlists.length > 0">
+      <div *ngFor="let setlist of setlists; let i = index" class="setlist-card">
+        <!-- Header do card -->
+        <div class="card-header">
+          <div class="card-title">
+            <h3>Setlist {{ i + 1 }}</h3>
+            <span class="card-date">{{ setlist.data | date: 'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="card-badge" [class.recent]="i === 0">
+            {{ i === 0 ? 'Atual' : 'Anterior' }}
+          </div>
+        </div>
+
+        <!-- Conteúdo do card -->
+        <div class="card-content">
+          <div class="content-section">
+            <div class="section-header">
+              <span class="section-icon">🎵</span>
+              <h4>Músicas</h4>
+              <span class="section-count">{{ setlist.musicas?.length || 0 }}</span>
+            </div>
+            <div class="section-list">
+              <div *ngFor="let musica of setlist.musicas" class="list-item">
+                <span class="item-name">{{ musica.nome }}</span>
+                <span class="item-detail">{{ musica.tom }}</span>
+              </div>
+              <div *ngIf="!setlist.musicas || setlist.musicas.length === 0" class="empty-section">
+                Nenhuma música adicionada
+              </div>
+            </div>
+          </div>
+
+          <div class="content-section">
+            <div class="section-header">
+              <span class="section-icon">👥</span>
+              <h4>Escala</h4>
+              <span class="section-count">{{ setlist.folgas?.length || 0 }}</span>
+            </div>
+            <div class="section-list">
+              <div *ngFor="let folga of setlist.folgas" class="list-item">
+                <span class="item-name">{{ folga.nome }}</span>
+              </div>
+              <div *ngIf="!setlist.folgas || setlist.folgas.length === 0" class="empty-section">
+                Nenhum membro na escala
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ações do card -->
+        <div class="card-actions">
+          <button 
+            class="btn-danger" 
+            *ngIf="i === 0" 
+            (click)="deletar(setlist.id_setlist)"
+            title="Deletar setlist">
+            <span class="btn-icon">🗑️</span>
+            Deletar
+          </button>
+          <button 
+            class="btn-share" 
+            (click)="compartilhar(setlist)"
+            title="Compartilhar setlist">
+            <span class="btn-icon">📤</span>
+            Compartilhar
+          </button>
+          <button 
+            class="btn-edit" 
+            title="Editar setlist">
+            <span class="btn-icon">✏️</span>
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

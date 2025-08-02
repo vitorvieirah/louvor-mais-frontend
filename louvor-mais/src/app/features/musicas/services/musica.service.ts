@@ -3,11 +3,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Musica } from "../models/musica.model";
 import { Paginacao } from "../models/paginacao.model";
-
-interface ResponseDto<T> {
-    dado: T,
-    erro: any
-}
+import { ResponseDto } from "../models/responseDto";
 
 @Injectable({
     providedIn: 'root'

@@ -2,38 +2,41 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Musica } from '../../models/musica.model';
 import { Router } from '@angular/router';
-import { MusicoService } from '../../services/musico.service';
+import { IntegranteService } from '../../services/musico.service';
+import { Integrante } from '../../models/integrante';
+import { FormsModule } from '@angular/forms';
+import { SetlistService } from '../../services/setlist.service';
 
 @Component({
   selector: 'app-selecao-folgas.component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './selecao-folgas.component.component.html',
   styleUrl: './selecao-folgas.component.component.scss'
 })
 export class SelecaoFolgasComponentComponent {
-  musicos: Musica[] = [];
-  selectedMusico: Musica[] = [];
+  integrantes: Integrante[] = [];
+  selectedIntegrante: Integrante[] = [];
   searchTerm: string = '';
   carregando = false;
-  todosMusicos: Musica[] = [];
+  todosIntegrantes: Integrante[] = [];
 
   constructor(
-    private musicoService: MusicoService,
-    // private setlistService: SetlistService,
+    private integranteService: IntegranteService,
+    private setlistService: SetlistService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.carregarMusicas();
+    this.carregarIntegrantes();
   }
 
-  carregarMusicas(): void {
+  carregarIntegrantes(): void {
     this.carregando = true;
-    this.musicoService.listar().subscribe({
+    this.integranteService.listar().subscribe({
       next: (res) => {
-        this.todosMusicos = res.dado.content;
-        this.musicos = [...this.todosMusicos];
+        this.todosIntegrantes = res.dado.content;
+        this.integrantes = [...this.todosIntegrantes];
         this.carregando = false;
       },
       error: (err) => {
@@ -43,26 +46,26 @@ export class SelecaoFolgasComponentComponent {
     });
   }
 
-  toggleSelecao(musica: Musica): void {
-    const index = this.selectedMusico.findIndex(m => m.id_musica === musica.id_musica);
+  toggleSelecao(integrante: Integrante): void {
+    const index = this.selectedIntegrante.findIndex(sel => sel.id_integrante === integrante.id_integrante);
     if (index >= 0) {
-      this.selectedMusico.splice(index, 1);
+      this.selectedIntegrante.splice(index, 1);
     } else {
-      this.selectedMusico.push(musica);
+      this.selectedIntegrante.push(integrante);
     }
   }
 
-  isSelecionada(musica: Musica): boolean {
-    return this.selectedMusico.some(m => m.id_musica === musica.id_musica);
+  isSelecionada(integrante: Integrante): boolean {
+    return this.selectedIntegrante.some(sel => sel.id_integrante === integrante.id_integrante);
   }
 
   irParaMontagem(): void {
-    // this.setlistService.setMusicas(this.selectedMusicas);
-    this.router.navigate(['/montar-setlist']);
+    this.setlistService.setIntegrantes(this.selectedIntegrante);
+    this.router.navigate(['/resumo-setlist']);
   }
 
-  get musicasFiltradas(): Musica[] {
-    return this.musicos.filter(m =>
+  get integrantesFiltrados(): Integrante[] {
+    return this.integrantes.filter(m =>
       m.nome.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }

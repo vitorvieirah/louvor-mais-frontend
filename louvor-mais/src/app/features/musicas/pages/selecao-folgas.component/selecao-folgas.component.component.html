@@ -1,15 +1,15 @@
 <section class="container">
     <header class="header">
         <h2>Folgas</h2>
-        <button class="proximo" [disabled]="selectedMusicas.length === 0" (click)="irParaMontagem()">Próximo</button>
+        <button class="proximo" [disabled]="selectedIntegrante.length === 0" (click)="irParaMontagem()">Próximo</button>
     </header>
 
-    <input type="text" class="search-bar" placeholder="Buscar música..." />
+    <input type="text" class="search-bar" placeholder="Buscar integrante..." [(ngModel)]="searchTerm" />
 
-    <div *ngFor="let musica of musicasFiltradas" class="musica-card" [class.selected]="isSelecionada(musica)"
-        (click)="toggleSelecao(musica)">
-        <h3>{{ musica.nome }}</h3>
-        <p><strong>Tom:</strong> {{ musica.tom }}</p>
-        <p><strong>Versão:</strong> {{ musica.versao }}</p>
+    <div *ngFor="let integrante of integrantesFiltrados" class="musica-card"
+        [class.selected]="isSelecionada(integrante)" (click)="toggleSelecao(integrante)">
+        <h3>{{ integrante.nome }}</h3>
+        <p><strong>Função:</strong> {{ integrante.funcao }}</p>
+        <p><strong>Descrição função:</strong> {{ integrante.descricaoFuncao }}</p>
     </div>
 </section>

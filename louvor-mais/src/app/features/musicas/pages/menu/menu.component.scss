@@ -1,0 +1,387 @@
+.menu-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ===== HEADER ===== */
+.menu-header {
+  background: #1E293B;
+  color: white;
+  box-shadow: 0 4px 20px rgba(30, 41, 59, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-title h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #F8FAFC, #E2E8F0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-title p {
+  margin: 0;
+  color: #94A3B8;
+  font-size: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* ===== BOTÕES ===== */
+.btn-primary, .btn-secondary, .btn-danger, .btn-share, .btn-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: #F8FAFC;
+  color: #1E293B;
+  box-shadow: 0 4px 15px rgba(248, 250, 252, 0.2);
+}
+
+.btn-primary:hover {
+  background: #E2E8F0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(248, 250, 252, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #F8FAFC;
+  border: 2px solid rgba(248, 250, 252, 0.3);
+}
+
+.btn-secondary:hover {
+  background: rgba(248, 250, 252, 0.1);
+  border-color: #F8FAFC;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: #EF4444;
+  color: white;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover {
+  background: #DC2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(239, 68, 68, 0.3);
+}
+
+.btn-share {
+  background: #10B981;
+  color: white;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.btn-share:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(16, 185, 129, 0.3);
+}
+
+.btn-edit {
+  background: #64748B;
+  color: white;
+  box-shadow: 0 4px 15px rgba(100, 116, 139, 0.2);
+}
+
+.btn-edit:hover {
+  background: #475569;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(100, 116, 139, 0.3);
+}
+
+.btn-icon {
+  font-size: 1rem;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ===== ESTADO VAZIO ===== */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #64748B;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+}
+
+.empty-state h3 {
+  color: #1E293B;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ===== GRID DE SETLISTS ===== */
+.setlists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+/* ===== CARD DE SETLIST ===== */
+.setlist-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(30, 41, 59, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.setlist-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(30, 41, 59, 0.12);
+}
+
+/* ===== HEADER DO CARD ===== */
+.card-header {
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #F8FAFC, #F1F5F9);
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title h3 {
+  color: #1E293B;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.card-date {
+  color: #64748B;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.card-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #64748B;
+  color: white;
+}
+
+.card-badge.recent {
+  background: linear-gradient(135deg, #10B981, #059669);
+}
+
+/* ===== CONTEÚDO DO CARD ===== */
+.card-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-icon {
+  font-size: 1.2rem;
+}
+
+.section-header h4 {
+  color: #1E293B;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+}
+
+.section-count {
+  background: #E2E8F0;
+  color: #64748B;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: #F8FAFC;
+  border-radius: 10px;
+  border-left: 3px solid #E2E8F0;
+  transition: all 0.2s ease;
+}
+
+.list-item:hover {
+  background: #F1F5F9;
+  border-left-color: #64748B;
+}
+
+.item-name {
+  color: #1E293B;
+  font-weight: 500;
+  flex: 1;
+}
+
+.item-detail {
+  color: #64748B;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #E2E8F0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+}
+
+.empty-section {
+  color: #94A3B8;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+  background: #F8FAFC;
+  border-radius: 10px;
+  border: 2px dashed #E2E8F0;
+}
+
+/* ===== AÇÕES DO CARD ===== */
+.card-actions {
+  padding: 1.5rem 2rem;
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.card-actions .btn-primary,
+.card-actions .btn-secondary,
+.card-actions .btn-danger,
+.card-actions .btn-share,
+.card-actions .btn-edit {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .header-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .setlists-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .main-content,
+  .header-content {
+    padding: 1rem;
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+  }
+  
+  .card-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title h1 {
+    font-size: 1.5rem;
+  }
+  
+  .empty-state {
+    padding: 2rem 1rem;
+  }
+  
+  .empty-icon {
+    font-size: 3rem;
+  }
+}
