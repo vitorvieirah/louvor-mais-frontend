@@ -32,7 +32,7 @@
       <div class="music-quick-info">
         <span class="info-badge info-tom">{{ dados.tom }}</span>
         <span class="info-badge info-versao">{{ dados.versao }}</span>
-        <span class="info-badge info-dificuldade" [class]="'difficulty-' + dados.dificuldade?.toLowerCase()">
+        <span class="info-badge info-dificuldade" [class]="'difficulty-' + dados.dificuldade.toLowerCase()">
           {{ dados.dificuldade }}
         </span>
       </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="data-item">
               <span class="data-label">Dificuldade:</span>
-              <span class="data-value difficulty-text" [class]="'difficulty-' + dados.dificuldade?.toLowerCase()">
+              <span class="data-value difficulty-text" [class]="'difficulty-' + dados.dificuldade.toLowerCase()">
                 {{ dados.dificuldade }}
               </span>
             </div>

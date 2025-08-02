@@ -1,15 +1,63 @@
 <section class="container">
-    <header class="header">
-        <h2>Folgas</h2>
-        <button class="proximo" [disabled]="selectedIntegrante.length === 0" (click)="irParaMontagem()">Próximo</button>
-    </header>
-
-    <input type="text" class="search-bar" placeholder="Buscar integrante..." [(ngModel)]="searchTerm" />
-
-    <div *ngFor="let integrante of integrantesFiltrados" class="musica-card"
-        [class.selected]="isSelecionada(integrante)" (click)="toggleSelecao(integrante)">
-        <h3>{{ integrante.nome }}</h3>
-        <p><strong>Função:</strong> {{ integrante.funcao }}</p>
-        <p><strong>Descrição função:</strong> {{ integrante.descricaoFuncao }}</p>
+  <header class="header">
+    <div class="header-content">
+      <h2 class="header-title">Folgas</h2>
+      <div class="selection-counter" *ngIf="selectedIntegrante.length > 0">
+        {{ selectedIntegrante.length }} selecionado{{ selectedIntegrante.length > 1 ? 's' : '' }}
+      </div>
     </div>
+    <button 
+      class="proximo" 
+      [disabled]="selectedIntegrante.length === 0" 
+      (click)="irParaMontagem()"
+      [class.pulse]="selectedIntegrante.length > 0">
+      <span class="button-text">Próximo</span>
+    </button>
+  </header>
+
+  <div class="search-container">
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input 
+        type="text" 
+        class="search-bar" 
+        placeholder="Buscar integrante..." 
+        [(ngModel)]="searchTerm" />
+      <button 
+        class="clear-search" 
+        *ngIf="searchTerm" 
+        (click)="searchTerm = ''">
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <div class="musicas-grid">
+    <div 
+      *ngFor="let integrante of integrantesFiltrados" 
+      class="musica-card" 
+      [class.selected]="isSelecionada(integrante)"
+      (click)="toggleSelecao(integrante)">
+      
+      <div class="card-header">
+        <div class="integrante-info">
+          <h3>{{ integrante.nome }}</h3>
+        </div>
+        <div class="selection-indicator" [class.active]="isSelecionada(integrante)">
+          <span class="checkmark">✓</span>
+        </div>
+      </div>
+      
+      <div class="integrante-details">
+        <p><strong>Função:</strong> <span class="funcao-badge">{{ integrante.funcao }}</span></p>
+        <p><strong>Descrição função:</strong> {{ integrante.descricaoFuncao }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="integrantesFiltrados.length === 0">
+    <div class="empty-icon">👥</div>
+    <h3>Nenhum integrante encontrado</h3>
+    <p>Tente ajustar sua busca</p>
+  </div>
 </section>

@@ -1,27 +1,108 @@
 <section class="container">
-  <h2>Escolha a data</h2>
-  <input type="date" [(ngModel)]="dataSelecionada" class="calendar" />
-
-  <h3>Resumo do setlist</h3>
-  <p><strong>Setlist</strong> - {{ dataSelecionada | date: 'dd/MM' }}</p>
-
-  <div class="resumo-card">
-    <div>
-      <h4>Músicas</h4>
-      <ul>
-        <li *ngFor="let musica of musicas">{{ musica.nome }} - {{ musica.tom }}</li>
-      </ul>
+  <header class="page-header">
+    <div class="header-content">
+      <h2 class="page-title">Montagem do Setlist</h2>
+      <p class="page-subtitle">Escolha a data e confirme os detalhes</p>
     </div>
-    <div>
-      <h4>Escala</h4>
-      <ul>
-        <li *ngFor="let integrante of integrantes">{{ integrante.nome }}</li>
-      </ul>
+  </header>
+
+  <div class="content-wrapper">
+    <div class="date-section">
+      <h3 class="section-title">📅 Escolha a data</h3>
+      <div class="calendar-wrapper">
+        <input 
+          type="date" 
+          [(ngModel)]="dataSelecionada" 
+          class="calendar"
+        />
+        <div class="calendar-icon">📆</div>
+      </div>
+      <div class="selected-date" *ngIf="dataSelecionada">
+        <span class="date-label">Data selecionada:</span>
+        <span class="date-value">{{ dataSelecionada | date: 'EEEE, dd/MM/yyyy' : 'pt-BR' }}</span>
+      </div>
+    </div>
+
+    <div class="resumo-section" *ngIf="dataSelecionada">
+      <h3 class="section-title">📋 Resumo do setlist</h3>
+      <div class="setlist-header">
+        <div class="setlist-title">
+          <span class="setlist-icon">🎵</span>
+          <span>Setlist - {{ dataSelecionada | date: 'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+
+      <div class="resumo-card">
+        <div class="resumo-section-item musicas-section">
+          <div class="section-header">
+            <h4 class="section-item-title">
+              <span class="section-icon">🎼</span>
+              Músicas
+            </h4>
+            <span class="count-badge">{{ musicas.length }}</span>
+          </div>
+          <div class="items-list" *ngIf="musicas.length > 0; else emptyMusicas">
+            <div *ngFor="let musica of musicas; let i = index" class="list-item">
+              <span class="item-number">{{ i + 1 }}.</span>
+              <div class="item-content">
+                <span class="item-name">{{ musica.nome }}</span>
+                <span class="item-detail tom-badge">{{ musica.tom }}</span>
+              </div>
+            </div>
+          </div>
+          <ng-template #emptyMusicas>
+            <div class="empty-message">
+              <span class="empty-icon">🎵</span>
+              <span>Nenhuma música selecionada</span>
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="resumo-section-item integrantes-section">
+          <div class="section-header">
+            <h4 class="section-item-title">
+              <span class="section-icon">👥</span>
+              Escala
+            </h4>
+            <span class="count-badge">{{ integrantes.length }}</span>
+          </div>
+          <div class="items-list" *ngIf="integrantes.length > 0; else emptyIntegrantes">
+            <div *ngFor="let integrante of integrantes" class="list-item">
+      
+              <div class="item-content">
+                <span class="item-name">{{ integrante.nome }}</span>
+                <span class="item-detail funcao-badge">{{ integrante.funcao }}</span>
+              </div>
+            </div>
+          </div>
+          <ng-template #emptyIntegrantes>
+            <div class="empty-message">
+              <span class="empty-icon">👤</span>
+              <span>Nenhum integrante na escala</span>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning-message" *ngIf="!dataSelecionada">
+      <div class="warning-icon">⚠️</div>
+      <span>Selecione uma data para continuar</span>
     </div>
   </div>
 
   <div class="botoes">
-    <button class="cancelar" (click)="cancelar()">Cancelar</button>
-    <button class="salvar" [disabled]="!dataSelecionada" (click)="salvar()">Salvar</button>
+    <button class="cancelar" (click)="cancelar()">
+      <span class="button-icon">✕</span>
+      <span>Cancelar</span>
+    </button>
+    <button 
+      class="salvar" 
+      [disabled]="!dataSelecionada" 
+      (click)="salvar()"
+      [class.ready]="dataSelecionada">
+      <span class="button-icon">💾</span>
+      <span>Salvar Setlist</span>
+    </button>
   </div>
 </section>

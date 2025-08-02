@@ -1,15 +1,60 @@
 <section class="container">
     <header class="header">
-        <h2>Músicas</h2>
-        <button class="proximo" [disabled]="selectedMusicas.length === 0" (click)="irParaMontagem()">Próximo</button>
+        <div class="header-content">
+            <h2 class="header-title">Músicas</h2>
+            <div class="selection-counter" *ngIf="selectedMusicas.length > 0">
+                {{ selectedMusicas.length }} selecionada{{ selectedMusicas.length > 1 ? 's' : '' }}
+            </div>
+        </div>
+        <button class="proximo-button" [disabled]="selectedMusicas.length === 0" (click)="irParaMontagem()"
+            [class.pulse]="selectedMusicas.length > 0">
+            <span class="button-icon">→</span>
+            <span class="button-text">Próximo</span>
+        </button>
     </header>
 
-    <input type="text" class="search-bar" placeholder="Buscar música..." />
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-bar" placeholder="Buscar música..." [(ngModel)]="searchTerm" />
 
-    <div *ngFor="let musica of musicasFiltradas" class="musica-card" [class.selected]="isSelecionada(musica)"
-        (click)="toggleSelecao(musica)">
-        <h3>{{ musica.nome }}</h3>
-        <p><strong>Tom:</strong> {{ musica.tom }}</p>
-        <p><strong>Versão:</strong> {{ musica.versao }}</p>
+        </div>
+    </div>
+
+    <div class="musicas-grid">
+        <div *ngFor="let musica of musicasFiltradas;" class="musica-card" [class.selected]="isSelecionada(musica)"
+            (click)="toggleSelecao(musica)">
+
+            <div class="card-header">
+                <h3 class="musica-nome">{{ musica?.nome || 'Sem nome' }}</h3>
+                <div class="selection-indicator" [class.active]="isSelecionada(musica)">
+                    <span class="checkmark">✓</span>
+                </div>
+            </div>
+
+            <div class="musica-details">
+                <div class="detail-item">
+                    <span class="detail-label">Tom:</span>
+                    <span class="detail-value tom-badge">{{ musica?.tom || '-' }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Versão:</span>
+                    <span class="detail-value">{{ musica?.versao || '-' }}</span>
+                </div>
+                <div class="detail-item" *ngIf="musica?.dificuldade">
+                    <span class="detail-label">Dificuldade:</span>
+                    <span *ngIf="musica?.dificuldade" class="detail-value difficulty-badge"
+                        [attr.data-difficulty]="musica.dificuldade.toLowerCase()">
+                        {{ musica?.dificuldade }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-state" *ngIf="musicasFiltradas.length === 0">
+        <div class="empty-icon">🎵</div>
+        <h3>Nenhuma música encontrada</h3>
+        <p>Tente ajustar sua busca ou adicione novas músicas</p>
     </div>
 </section>

@@ -31,7 +31,7 @@ export class ResumoSetlistComponent {
 
   cancelar(): void {
     this.setlistService.reset();
-    this.router.navigate(['/musicas']); // ou rota inicial
+    this.router.navigate(['/menu']); 
   }
 
   salvar(): void {
@@ -47,7 +47,7 @@ export class ResumoSetlistComponent {
       next: (res) => {
         console.log('Setlist salvo com sucesso!', res);
         this.setlistService.reset();
-        this.router.navigate(['/musicas']);
+        this.router.navigate(['/menu']);
       },
       error: (err) => {
         console.error('Erro ao salvar setlist', err);
@@ -55,6 +55,6 @@ export class ResumoSetlistComponent {
     });
 
     this.setlistService.reset();
-    this.router.navigate(['/musicas']);
+    this.router.navigate(['/menu']);
   }
 }

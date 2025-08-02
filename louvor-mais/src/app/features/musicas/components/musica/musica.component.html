@@ -4,18 +4,11 @@
       <h3 class="music-title">{{ dados.nome }}</h3>
       <div class="music-badges">
         <span class="badge badge-tom">{{ dados.tom }}</span>
-        <span class="badge badge-dificuldade" [class]="'difficulty-' + dados.dificuldade?.toLowerCase()">
+        <span class="badge badge-dificuldade" [class]="'difficulty-' + dados.dificuldade.toLowerCase()">
           {{ dados.dificuldade }}
         </span>
       </div>
     </div>
-    <button class="link-button" (click)="copiarTexto()" title="Copiar link">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-        <path d="14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-      </svg>
-    </button>
   </div>
   
   <div class="music-details">
@@ -29,15 +22,6 @@
     <div class="music-meta">
       <span class="meta-icon">🎵</span>
       <span class="meta-text">Clique para ver detalhes</span>
-    </div>
-    <div class="music-actions">
-      <button class="action-btn" title="Editar música">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-          <path d="18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-        </svg>
-      </button>
     </div>
   </div>
 </div>

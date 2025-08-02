@@ -3,16 +3,19 @@ import { Component } from '@angular/core';
 import { Setlist } from '../../models/setlist';
 import { Router } from '@angular/router';
 import { SetlistService } from '../../services/setlist.service';
+import { ModalDeletarComponent } from '../../components/modal-deletar/modal-deletar.component';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModalDeletarComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent {
   setlists: Setlist[] = [];
+  modalDeletar = false;
+  idSetlistSelectd: string = '';
 
   constructor(
     private router: Router,
@@ -42,8 +45,20 @@ export class MenuComponent {
     this.router.navigate(['/musicas']);
   }
 
-  deletar(setlistId: string): void {
-    this.setlistService.deletar(setlistId);
+  abrirModalDeletar(setlistId: string) {
+    this.idSetlistSelectd = setlistId;
+    this.modalDeletar = true;
+  }
+
+  fecharModalDeletar() {
+    this.modalDeletar = false;
+  }
+
+  deletar(): void {
+    if(this.idSetlistSelectd)
+      this.setlistService.deletar(this.idSetlistSelectd);
+    this.fecharModalDeletar();
+    window.location.reload();
   }
 
   compartilhar(setlist: Setlist): void {

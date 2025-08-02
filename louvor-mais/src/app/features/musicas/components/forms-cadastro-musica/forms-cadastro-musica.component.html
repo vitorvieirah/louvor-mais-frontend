@@ -1,28 +1,78 @@
-<form class="form-container" #form="ngForm" (ngSubmit)="salvar(form)">
-    <app-input-forms placeholder="Nome da música" [(ngModel)]="musica.nome" name="nome"></app-input-forms>
+<form class="form" #form="ngForm" (ngSubmit)="salvar(form)">
+  <div class="form-group">
+    <label class="form-label" for="nome">Nome da música</label>
+    <app-input-forms 
+      id="nome"
+      placeholder="Digite o nome da música" 
+      [(ngModel)]="musica.nome" 
+      name="nome"
+      class="form-input">
+    </app-input-forms>
+  </div>
 
-    <app-select-input-component
-        placeholder="Tom da música"
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label" for="tom">Tom da música</label>
+      <app-select-input-component
+        id="tom"
+        placeholder="Selecione o tom"
         [(ngModel)]="musica.tom"
         name="tom"
         [options]="tons"
         required
-        >
-    ></app-select-input-component>
+        class="form-select">
+      </app-select-input-component>
+    </div>
 
-    <app-input-forms placeholder="Versão da música" [(ngModel)]="musica.versao" name="versao"></app-input-forms>
-
-    <app-select-input-component
-        placeholder="Dificuldade"
+    <div class="form-group">
+      <label class="form-label" for="dificuldade">Dificuldade</label>
+      <app-select-input-component
+        id="dificuldade"
+        placeholder="Selecione a dificuldade"
         [(ngModel)]="musica.dificuldade"
         name="dificuldade"
         [options]="dificuldades"
-        >
-    ></app-select-input-component>
+        class="form-select">
+      </app-select-input-component>
+    </div>
+  </div>
 
-    <app-input-forms placeholder="Link da música" [(ngModel)]="musica.link" name="link"></app-input-forms>
+  <div class="form-group">
+    <label class="form-label" for="versao">Versão da música</label>
+    <app-input-forms 
+      id="versao"
+      placeholder="Ex: Acústica, Original, Cover" 
+      [(ngModel)]="musica.versao" 
+      name="versao"
+      class="form-input">
+    </app-input-forms>
+  </div>
 
-    <app-input-forms placeholder="Cifra da música" [(ngModel)]="musica.cifra" name="cifra"></app-input-forms>
+  <div class="form-group">
+    <label class="form-label" for="link">Link da música</label>
+    <app-input-forms 
+      id="link"
+      placeholder="https://exemplo.com/musica" 
+      [(ngModel)]="musica.link" 
+      name="link"
+      type="url"
+      class="form-input">
+    </app-input-forms>
+  </div>
 
-    <button class="save-button" type="submit">SALVAR</button>
+  <div class="form-group">
+    <label class="form-label" for="cifra">Cifra da música</label>
+    <app-input-forms 
+      id="cifra"
+      placeholder="Cole aqui a cifra da música...&#10;&#10;Ex:&#10;[C] Quando [G] o sol se [Am] põe&#10;[F] E a noite [C] vem [G]"
+      [(ngModel)]="musica.cifra" 
+      name="cifra"
+      type="textarea"
+      class="form-textarea">
+    </app-input-forms>
+  </div>
+
+  <button class="save-button" type="submit">
+    <span class="button-text">Salvar música</span>
+  </button>
 </form>

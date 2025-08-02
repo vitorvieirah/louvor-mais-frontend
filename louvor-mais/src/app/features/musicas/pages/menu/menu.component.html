@@ -40,9 +40,6 @@
             <h3>Setlist {{ i + 1 }}</h3>
             <span class="card-date">{{ setlist.data | date: 'dd/MM/yyyy' }}</span>
           </div>
-          <div class="card-badge" [class.recent]="i === 0">
-            {{ i === 0 ? 'Atual' : 'Anterior' }}
-          </div>
         </div>
 
         <!-- Conteúdo do card -->
@@ -51,7 +48,7 @@
             <div class="section-header">
               <span class="section-icon">🎵</span>
               <h4>Músicas</h4>
-              <span class="section-count">{{ setlist.musicas?.length || 0 }}</span>
+              <span class="section-count">{{ setlist.musicas.length || 0 }}</span>
             </div>
             <div class="section-list">
               <div *ngFor="let musica of setlist.musicas" class="list-item">
@@ -68,7 +65,7 @@
             <div class="section-header">
               <span class="section-icon">👥</span>
               <h4>Escala</h4>
-              <span class="section-count">{{ setlist.folgas?.length || 0 }}</span>
+              <span class="section-count">{{ setlist.folgas.length || 0 }}</span>
             </div>
             <div class="section-list">
               <div *ngFor="let folga of setlist.folgas" class="list-item">
@@ -85,8 +82,7 @@
         <div class="card-actions">
           <button 
             class="btn-danger" 
-            *ngIf="i === 0" 
-            (click)="deletar(setlist.id_setlist)"
+            (click)="abrirModalDeletar(setlist.id_setlist)"
             title="Deletar setlist">
             <span class="btn-icon">🗑️</span>
             Deletar
@@ -98,14 +94,15 @@
             <span class="btn-icon">📤</span>
             Compartilhar
           </button>
-          <button 
-            class="btn-edit" 
-            title="Editar setlist">
-            <span class="btn-icon">✏️</span>
-            Editar
-          </button>
         </div>
       </div>
     </div>
+
+    <app-modal-deletar 
+      *ngIf="modalDeletar" 
+      (fecharModal)="fecharModalDeletar()" 
+      (confirmarExclusao)="deletar()">
+    </app-modal-deletar>
+
   </main>
 </div>

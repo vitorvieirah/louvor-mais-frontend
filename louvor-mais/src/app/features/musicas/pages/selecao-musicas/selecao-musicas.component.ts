@@ -4,13 +4,14 @@ import { MusicaService } from '../../services/musica.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SetlistService } from '../../services/setlist.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-selecao-musicas',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './selecao-musicas.component.html',
-  styleUrl: './selecao-musicas.component.scss'
+  styleUrl: './selecao-musicas.component.scss',
 })
 export class SelecaoMusicasComponent {
   musicas: Musica[] = [];
