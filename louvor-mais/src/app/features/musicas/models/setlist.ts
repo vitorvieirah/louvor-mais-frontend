@@ -6,4 +6,5 @@ export interface Setlist {
     data: string;
     musicas: Musica[];
     folgas: Integrante[];
+    escalados: Integrante[];
 }

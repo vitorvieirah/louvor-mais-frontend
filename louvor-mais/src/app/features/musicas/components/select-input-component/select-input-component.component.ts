@@ -1,11 +1,12 @@
 import { Component, Input, forwardRef, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-select-input-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
+
   templateUrl: './select-input-component.component.html',
   styleUrl: './select-input-component.component.scss',
   providers: [

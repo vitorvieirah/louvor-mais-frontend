@@ -4,6 +4,7 @@ import { Paginacao } from "../models/paginacao.model";
 import { ResponseDto } from "../models/responseDto";
 import { Integrante } from "../models/integrante";
 import { HttpClient, HttpParams } from "@angular/common/http";
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 export class IntegranteService {
     constructor(private http: HttpClient) { }
 
-    private readonly URL_API = 'http://localhost:8080/integrantes';
+    private readonly URL_API = `${environment.apiUrl}/integrantes`;
 
     listar(): Observable<ResponseDto<Paginacao<Integrante>>> {
         const params = new HttpParams()

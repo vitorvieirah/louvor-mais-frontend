@@ -65,13 +65,13 @@
             <div class="section-header">
               <span class="section-icon">👥</span>
               <h4>Escala</h4>
-              <span class="section-count">{{ setlist.folgas.length || 0 }}</span>
+              <span class="section-count">{{ setlist.escalados.length || 0 }}</span>
             </div>
             <div class="section-list">
-              <div *ngFor="let folga of setlist.folgas" class="list-item">
-                <span class="item-name">{{ folga.nome }}</span>
+              <div *ngFor="let escala of setlist.escalados" class="list-item">
+                <span class="item-name">{{ escala.nome }}</span>
               </div>
-              <div *ngIf="!setlist.folgas || setlist.folgas.length === 0" class="empty-section">
+              <div *ngIf="!setlist.escalados || setlist.escalados.length === 0" class="empty-section">
                 Nenhum membro na escala
               </div>
             </div>
@@ -80,28 +80,25 @@
 
         <!-- Ações do card -->
         <div class="card-actions">
-          <button 
-            class="btn-danger" 
-            (click)="abrirModalDeletar(setlist.id_setlist)"
-            title="Deletar setlist">
+          <button class="btn-danger" (click)="abrirModalDeletar(setlist.id_setlist)" title="Deletar setlist">
             <span class="btn-icon">🗑️</span>
             Deletar
           </button>
-          <button 
-            class="btn-share" 
-            (click)="compartilhar(setlist)"
-            title="Compartilhar setlist">
+
+          <button class="btn-share" (click)="compartilhar(setlist)" title="Compartilhar setlist">
             <span class="btn-icon">📤</span>
             Compartilhar
+          </button>
+
+          <button class="btn-open" (click)="abrirLinks(setlist)" title="Abrir músicas">
+            <span class="btn-icon">🎬</span>
+            Abrir Músicas
           </button>
         </div>
       </div>
     </div>
 
-    <app-modal-deletar 
-      *ngIf="modalDeletar" 
-      (fecharModal)="fecharModalDeletar()" 
-      (confirmarExclusao)="deletar()">
+    <app-modal-deletar *ngIf="modalDeletar" (fecharModal)="fecharModalDeletar()" (confirmarExclusao)="deletar()">
     </app-modal-deletar>
 
   </main>

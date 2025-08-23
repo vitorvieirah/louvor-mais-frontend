@@ -1,9 +1,11 @@
+import { Integrante } from './../../models/integrante';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Setlist } from '../../models/setlist';
 import { Router } from '@angular/router';
 import { SetlistService } from '../../services/setlist.service';
 import { ModalDeletarComponent } from '../../components/modal-deletar/modal-deletar.component';
+import { IntegranteService } from '../../services/musico.service';
 
 @Component({
   selector: 'app-menu',
@@ -55,14 +57,85 @@ export class MenuComponent {
   }
 
   deletar(): void {
-    if(this.idSetlistSelectd)
+    if (this.idSetlistSelectd)
       this.setlistService.deletar(this.idSetlistSelectd);
     this.fecharModalDeletar();
     window.location.reload();
   }
 
   compartilhar(setlist: Setlist): void {
-    // Aqui você pode gerar link ou usar Web Share API
-    console.log('Compartilhando setlist:', setlist);
+    console.log(setlist);
+    const dataFormatada = new Date(setlist.data).toLocaleDateString('pt-BR');
+
+    const folgas = setlist.folgas.map(f => `- ${f.nome}`).join('\n') || 'Nenhuma';
+
+    const escala = this.getEscala(setlist) || 'Nenhum integrante na escala';
+
+    const musicas = setlist.musicas.map(m =>
+      `- ${m.nome} - ${m.versao} // TOM ${m.tom.toUpperCase()}`
+    ).join('\n\n') || 'Nenhuma música adicionada';
+
+    const texto = `Culto de Domingo - ${dataFormatada}
+
+FOLGAS:
+${folgas}
+
+ESCALA:
+${escala}
+
+______________________________________
+
+SETLIST:
+
+${musicas}
+
+______________________________________
+
+Playlist:
+https://youtube.com/playlist?list=PLGw2dpmuWu_reERIsGixYkF1nK9zKMiWn&si=yfLKNxq5th1xst43`;
+
+    navigator.clipboard.writeText(texto).then(() => {
+      alert('Setlist copiado para a área de transferência!');
+    }).catch(err => {
+      console.error('Erro ao copiar texto:', err);
+    });
   }
+
+
+  getEscala(setlist: Setlist): string {
+    const emojisPorFuncao: { [key: string]: string } = {
+      'VOCAL': '🎤 - Vocal:',
+      'BATERIA': '🥁 - Bateria:',
+      'BAIXO': '🎸 - Baixo:',
+      'VIOLAO': '🎸 - Violao:',
+      'GUITARRA': '🎸 - Guitarra:',
+      'TECLADO': '🎹 - Teclado:',
+      'DM': '🎤 - DM:',
+    };
+
+    const linhas: string[] = [];
+
+    Object.keys(emojisPorFuncao).forEach(funcao => {
+      const integrante = setlist.escalados.find(i => i.funcao === funcao);
+      const nome = integrante ? integrante.nome : '🚫';
+      linhas.push(`${emojisPorFuncao[funcao]} ${nome}`);
+    });
+
+    return linhas.join('\n');
+  }
+
+  abrirLinks(setlist: Setlist): void {
+    const youtubePlaylistUrl = 'https://youtube.com/playlist?list=PLGw2dpmuWu_reERIsGixYkF1nK9zKMiWn&si=yfLKNxq5th1xst43';
+
+    
+    setlist.musicas.forEach(musica => {
+      if (musica.link) {
+        window.open(musica.link, '_blank');
+      }
+    });
+
+   
+    window.open(youtubePlaylistUrl, '_blank');
+  }
+
 }

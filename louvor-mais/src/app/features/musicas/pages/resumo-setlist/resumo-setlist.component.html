@@ -64,10 +64,10 @@
               <span class="section-icon">👥</span>
               Escala
             </h4>
-            <span class="count-badge">{{ integrantes.length }}</span>
+            <span class="count-badge">{{ escalados.length }}</span>
           </div>
-          <div class="items-list" *ngIf="integrantes.length > 0; else emptyIntegrantes">
-            <div *ngFor="let integrante of integrantes" class="list-item">
+          <div class="items-list" *ngIf="escalados.length > 0; else emptyIntegrantes">
+            <div *ngFor="let integrante of escalados" class="list-item">
       
               <div class="item-content">
                 <span class="item-name">{{ integrante.nome }}</span>
