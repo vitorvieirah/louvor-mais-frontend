@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { Musica } from "../models/musica.model";
 import { Paginacao } from "../models/paginacao.model";
 import { ResponseDto } from "../models/responseDto";
-import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +12,7 @@ export class MusicaService {
     constructor(private http: HttpClient) { }
     
 
-    private readonly URL_API = `${environment.apiUrl}/musicas`;
+    private readonly URL_API = 'https://louvor-mais-backend.onrender.com/musicas';
 
 
     listar(): Observable<ResponseDto<Paginacao<Musica>>> {

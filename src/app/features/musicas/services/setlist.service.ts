@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { ResponseDto } from '../models/responseDto';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Paginacao } from '../models/paginacao.model';
-import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +16,7 @@ export class SetlistService {
     private musicasSelecionadas: Musica[] = [];
     private integrantesSelecionados: Integrante[] = [];
 
-    private readonly URL_API = `${environment.apiUrl}/setlists`;
+    private readonly URL_API = 'https://louvor-mais-backend.onrender.com/setlists';
 
     setMusicas(musicas: Musica[]) {
         this.musicasSelecionadas = musicas;

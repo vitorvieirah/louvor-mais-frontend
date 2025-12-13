@@ -4,7 +4,6 @@ import { Paginacao } from "../models/paginacao.model";
 import { ResponseDto } from "../models/responseDto";
 import { Integrante } from "../models/integrante";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { environment } from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +11,7 @@ import { environment } from '../../../../environments/environment';
 export class IntegranteService {
     constructor(private http: HttpClient) { }
 
-    private readonly URL_API = `${environment.apiUrl}/integrantes`;
+    private readonly URL_API = 'https://louvor-mais-backend.onrender.com/integrantes';
 
     listar(): Observable<ResponseDto<Paginacao<Integrante>>> {
         const params = new HttpParams()
