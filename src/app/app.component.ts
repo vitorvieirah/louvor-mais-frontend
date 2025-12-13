@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get('https://sua-api-no-render.onrender.com/ping').subscribe({
+    this.http.get('https://louvor-mais-backend.onrender.com/ping').subscribe({
       next: () => console.log('API acordada!'),
       error: err => console.error('Erro ao acordar a API:', err)
     });
