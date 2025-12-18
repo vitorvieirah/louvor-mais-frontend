@@ -35,7 +35,7 @@ export class ListagemMusicasComponent implements OnInit {
     this.musicaService.listar().subscribe({
       next: (res) => {
         this.todasMusicas = res.dado.content;
-        this.musicas = [...this.todasMusicas];
+        this.musicas = [...this.todasMusicas].sort((a, b) => a.nome.localeCompare(b.nome));
         this.carregando = false;
       },
       error: (err) => {
@@ -59,7 +59,7 @@ export class ListagemMusicasComponent implements OnInit {
       m.tom.toLowerCase().includes(termo) ||
       m.versao.toLowerCase().includes(termo) ||
       m.dificuldade.toLowerCase().includes(termo)
-    );
+    ).sort((a, b) => a.nome.localeCompare(b.nome));
   }
 
   telaCriar() {

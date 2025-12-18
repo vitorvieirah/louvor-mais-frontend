@@ -35,7 +35,7 @@ export class SelecaoMusicasComponent {
     this.musicaService.listar().subscribe({
       next: (res) => {
         this.todasMusicas = res.dado.content;
-        this.musicas = [...this.todasMusicas];
+        this.musicas = [...this.todasMusicas].sort((a, b) => a.nome.localeCompare(b.nome));
         this.carregando = false;
       },
       error: (err) => {
@@ -66,6 +66,6 @@ export class SelecaoMusicasComponent {
   get musicasFiltradas(): Musica[] {
     return this.musicas.filter(m =>
       m.nome.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    ).sort((a, b) => a.nome.localeCompare(b.nome));
   }
 }
