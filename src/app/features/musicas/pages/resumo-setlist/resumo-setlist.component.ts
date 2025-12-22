@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Setlist } from '../../models/setlist';
 import { IntegranteService } from '../../services/musico.service';
+import { BotaoVoltarComponent } from "../../components/botao-voltar/botao-voltar.component";
 
 @Component({
   selector: 'app-resumo-setlist',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BotaoVoltarComponent],
   templateUrl: './resumo-setlist.component.html',
   styleUrl: './resumo-setlist.component.scss'
 })

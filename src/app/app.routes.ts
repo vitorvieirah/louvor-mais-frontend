@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import type { Routes } from '@angular/router';
 import { CadastroMusicaComponentComponent } from './features/musicas/pages/cadastro-musica-component/cadastro-musica-component.component';
 import { ListagemMusicasComponent } from './features/musicas/pages/listagem-musicas-component/listagem-musicas-component.component';
 import { MusicaInfoComponent } from './features/musicas/pages/musica-info/musica-info.component';

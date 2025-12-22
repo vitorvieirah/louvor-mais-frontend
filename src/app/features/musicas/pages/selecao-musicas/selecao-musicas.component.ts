@@ -5,11 +5,16 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SetlistService } from '../../services/setlist.service';
 import { FormsModule } from '@angular/forms';
+import { BotaoVoltarComponent } from "../../components/botao-voltar/botao-voltar.component";
+
+function normalizeString(str: string): string {
+  return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+}
 
 @Component({
   selector: 'app-selecao-musicas',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BotaoVoltarComponent],
   templateUrl: './selecao-musicas.component.html',
   styleUrl: './selecao-musicas.component.scss',
 })
@@ -64,8 +69,9 @@ export class SelecaoMusicasComponent {
   }
 
   get musicasFiltradas(): Musica[] {
+    const termoNormalizado = normalizeString(this.searchTerm.toLowerCase());
     return this.musicas.filter(m =>
-      m.nome.toLowerCase().includes(this.searchTerm.toLowerCase())
+      normalizeString(m.nome.toLowerCase()).includes(termoNormalizado)
     ).sort((a, b) => a.nome.localeCompare(b.nome));
   }
 }

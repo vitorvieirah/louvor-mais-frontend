@@ -6,11 +6,12 @@ import { IntegranteService } from '../../services/musico.service';
 import { Integrante } from '../../models/integrante';
 import { FormsModule } from '@angular/forms';
 import { SetlistService } from '../../services/setlist.service';
+import { BotaoVoltarComponent } from "../../components/botao-voltar/botao-voltar.component";
 
 @Component({
   selector: 'app-selecao-folgas.component',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BotaoVoltarComponent],
   templateUrl: './selecao-folgas.component.component.html',
   styleUrl: './selecao-folgas.component.component.scss'
 })
