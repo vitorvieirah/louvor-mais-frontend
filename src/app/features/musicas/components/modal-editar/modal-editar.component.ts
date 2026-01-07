@@ -57,6 +57,12 @@ export class ModalEditarComponent implements OnInit {
     { value: 'BM', label: 'Bm (Si menor)' }
   ];
 
+  climas = [
+    { value: 'CALMO', label: 'Calmo' },
+    { value: 'ALEGRE', label: 'Alegre' },
+    { value: 'ANIMADO', label: 'Animado' }
+  ];
+
   constructor(private musicaService: MusicaService) {}
 
   ngOnInit(): void {
@@ -76,6 +82,11 @@ export class ModalEditarComponent implements OnInit {
     const tomSelecionado = this.tons.find(t => t.value === this.musicaEditada.tom);
     if (tomSelecionado) {
       this.musicaEditada.tom = tomSelecionado.value;
+    }
+
+    const climaSelecionado = this.climas.find(c => c.value === this.musicaEditada.clima);
+    if (climaSelecionado) {
+      this.musicaEditada.clima = climaSelecionado.value;
     }
 
     this.musicaService.atualizarMusica(this.musicaEditada).subscribe({

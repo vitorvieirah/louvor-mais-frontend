@@ -72,7 +72,7 @@ export class MenuComponent {
     const escala = this.getEscala(setlist) || 'Nenhum integrante na escala';
 
     const musicas = setlist.musicas.map(m =>
-      `- ${m.nome} - ${m.versao} // TOM ${m.tom.toUpperCase()}`
+      `- ${m.nome} - ${m.artista} // TOM ${m.tom.toUpperCase()}`
     ).join('\n\n') || 'Nenhuma música adicionada';
 
     const texto = `Culto de Domingo - ${dataFormatada}

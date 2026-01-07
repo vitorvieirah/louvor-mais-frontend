@@ -46,6 +46,12 @@ export class FormsCadastroMusicaComponent {
     { value: 'BM', label: 'Bm (Si menor)' }
   ];
 
+  climas = [
+    { value: 'CALMO', label: 'Calmo' },
+    { value: 'ALEGRE', label: 'Alegre' },
+    { value: 'ANIMADO', label: 'Animado' }
+  ];
+
   musica: Musica = {
     id_musica: '',
     nome: '',
@@ -68,9 +74,14 @@ export class FormsCadastroMusicaComponent {
       musicaParaSalvar.tom = tomSelecionado.value;
     }
 
+    // Encontrar o valor do enum para o clima selecionado
+    const climaSelecionado = this.climas.find(c => c.value === this.musica.clima);
+    if (climaSelecionado) {
+      musicaParaSalvar.clima = climaSelecionado.value;
+    }
+    
     // Adicionar os novos campos
     musicaParaSalvar.artista = this.musica.artista;
-    musicaParaSalvar.clima = this.musica.clima;
     musicaParaSalvar.bpm = this.musica.bpm;
     musicaParaSalvar.compositor = this.musica.compositor;
 

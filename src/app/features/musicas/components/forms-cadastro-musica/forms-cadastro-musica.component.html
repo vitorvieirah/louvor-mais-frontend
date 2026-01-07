@@ -26,13 +26,15 @@
   
       <div class="form-group">
         <label class="form-label" for="clima">Clima</label>
-        <app-input-forms 
+        <app-select-input-component
           id="clima"
-          placeholder="Ex: Calmo, Alegre, Animado" 
-          [(ngModel)]="musica.clima" 
+          placeholder="Selecione o clima"
+          [(ngModel)]="musica.clima"
           name="clima"
-          class="form-input">
-        </app-input-forms>
+          [options]="climas"
+          required
+          class="form-select">
+        </app-select-input-component>
       </div>
     </div>
   
@@ -88,7 +90,7 @@
     <label class="form-label" for="cifra">Cifra da música</label>
     <app-input-forms 
       id="cifra"
-      placeholder="Cole aqui a cifra da música...&#10;&#10;Ex:&#10;[C] Quando [G] o sol se [Am] põe&#10;[F] E a noite [C] vem [G]"
+      placeholder="Cole aqui o link da cifra"
       [(ngModel)]="musica.cifra" 
       name="cifra"
       type="textarea"

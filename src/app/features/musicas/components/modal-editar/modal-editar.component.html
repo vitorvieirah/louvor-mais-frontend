@@ -19,7 +19,13 @@
 
                 <app-input-forms placeholder="Artista" [(ngModel)]="musicaEditada.artista" name="artista"></app-input-forms>
 
-                <app-input-forms placeholder="Clima" [(ngModel)]="musicaEditada.clima" name="clima"></app-input-forms>
+                <app-select-input-component
+                    placeholder="Clima"
+                    [(ngModel)]="musicaEditada.clima"
+                    name="clima"
+                    [options]="climas"
+                    >
+                ></app-select-input-component>
 
                 <app-input-forms placeholder="BPM" [(ngModel)]="musicaEditada.bpm" name="bpm" type="number"></app-input-forms>
 
