@@ -31,10 +31,8 @@
       <h1 class="music-title">{{ dados.nome }}</h1>
       <div class="music-quick-info">
         <span class="info-badge info-tom">{{ dados.tom }}</span>
-        <span class="info-badge info-versao">{{ dados.versao }}</span>
-        <span class="info-badge info-dificuldade" [class]="'difficulty-' + dados.dificuldade.toLowerCase()">
-          {{ dados.dificuldade }}
-        </span>
+        <span class="info-badge info-clima">{{ dados.clima }}</span>
+        <span class="info-badge info-artista">{{ dados.artista }}</span>
       </div>
     </div>
 
@@ -48,19 +46,25 @@
         </div>
         <div class="section-content">
           <div class="data-grid">
-            <div class="data-item">
-              <span class="data-label">Versão:</span>
-              <span class="data-value">{{ dados.versao }}</span>
+            <div class="data-item" *ngIf="dados.artista">
+              <span class="data-label">Artista:</span>
+              <span class="data-value">{{ dados.artista }}</span>
             </div>
             <div class="data-item">
               <span class="data-label">Tom:</span>
               <span class="data-value">{{ dados.tom }}</span>
             </div>
-            <div class="data-item">
-              <span class="data-label">Dificuldade:</span>
-              <span class="data-value difficulty-text" [class]="'difficulty-' + dados.dificuldade.toLowerCase()">
-                {{ dados.dificuldade }}
-              </span>
+            <div class="data-item" *ngIf="dados.clima">
+              <span class="data-label">Clima:</span>
+              <span class="data-value">{{ dados.clima }}</span>
+            </div>
+            <div class="data-item" *ngIf="dados.bpm">
+              <span class="data-label">BPM:</span>
+              <span class="data-value">{{ dados.bpm }}</span>
+            </div>
+            <div class="data-item" *ngIf="dados.compositor">
+              <span class="data-label">Compositor:</span>
+              <span class="data-value">{{ dados.compositor }}</span>
             </div>
           </div>
         </div>

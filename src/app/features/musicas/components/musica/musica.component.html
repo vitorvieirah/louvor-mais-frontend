@@ -4,17 +4,9 @@
       <h3 class="music-title">{{ dados.nome }}</h3>
       <div class="music-badges">
         <span class="badge badge-tom">{{ dados.tom }}</span>
-        <span class="badge badge-dificuldade" [class]="'difficulty-' + dados.dificuldade.toLowerCase()">
-          {{ dados.dificuldade }}
-        </span>
+        <span class="badge badge-clima">{{ dados.clima }}</span>
+        <span class="badge badge-artista">{{ dados.artista }}</span>
       </div>
-    </div>
-  </div>
-  
-  <div class="music-details">
-    <div class="detail-item">
-      <span class="detail-label">Versão:</span>
-      <span class="detail-value">{{ dados.versao }}</span>
     </div>
   </div>
   
@@ -22,6 +14,8 @@
     <div class="music-meta">
       <span class="meta-icon">🎵</span>
       <span class="meta-text">Clique para ver detalhes</span>
+      <span class="meta-text" *ngIf="dados.bpm">BPM: {{ dados.bpm }}</span>
+      <span class="meta-text" *ngIf="dados.compositor">Compositor: {{ dados.compositor }}</span>
     </div>
   </div>
 </div>

@@ -46,18 +46,14 @@ export class FormsCadastroMusicaComponent {
     { value: 'BM', label: 'Bm (Si menor)' }
   ];
 
-  dificuldades = [
-    { value: 'FACIL', label: 'Fácil' },
-    { value: 'MEDIA', label: 'Média' },
-    { value: 'DIFICIL', label: 'Difícil' }
-  ];
-
   musica: Musica = {
     id_musica: '',
     nome: '',
+    artista: '',
     tom: '',
-    versao: '',
-    dificuldade: '', 
+    clima: '',
+    bpm: 0,
+    compositor: '',
     link: '',
     cifra: ''
   };
@@ -72,11 +68,11 @@ export class FormsCadastroMusicaComponent {
       musicaParaSalvar.tom = tomSelecionado.value;
     }
 
-    // Encontrar o valor do enum para a dificuldade selecionada
-    const dificuldadeSelecionada = this.dificuldades.find(d => d.value === this.musica.dificuldade);
-    if (dificuldadeSelecionada) {
-      musicaParaSalvar.dificuldade = dificuldadeSelecionada.value;
-    }
+    // Adicionar os novos campos
+    musicaParaSalvar.artista = this.musica.artista;
+    musicaParaSalvar.clima = this.musica.clima;
+    musicaParaSalvar.bpm = this.musica.bpm;
+    musicaParaSalvar.compositor = this.musica.compositor;
 
     this.musicaService.cadastrar(musicaParaSalvar).subscribe({
       next: () => {

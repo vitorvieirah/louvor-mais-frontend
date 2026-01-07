@@ -11,41 +11,65 @@
   </div>
 
   <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="tom">Tom da música</label>
+        <app-select-input-component
+          id="tom"
+          placeholder="Selecione o tom"
+          [(ngModel)]="musica.tom"
+          name="tom"
+          [options]="tons"
+          required
+          class="form-select">
+        </app-select-input-component>
+      </div>
+  
+      <div class="form-group">
+        <label class="form-label" for="clima">Clima</label>
+        <app-input-forms 
+          id="clima"
+          placeholder="Ex: Calmo, Alegre, Animado" 
+          [(ngModel)]="musica.clima" 
+          name="clima"
+          class="form-input">
+        </app-input-forms>
+      </div>
+    </div>
+  
     <div class="form-group">
-      <label class="form-label" for="tom">Tom da música</label>
-      <app-select-input-component
-        id="tom"
-        placeholder="Selecione o tom"
-        [(ngModel)]="musica.tom"
-        name="tom"
-        [options]="tons"
-        required
-        class="form-select">
-      </app-select-input-component>
+      <label class="form-label" for="artista">Artista</label>
+      <app-input-forms 
+        id="artista"
+        placeholder="Digite o nome do artista" 
+        [(ngModel)]="musica.artista" 
+        name="artista"
+        class="form-input">
+      </app-input-forms>
+    </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label" for="bpm">BPM</label>
+      <app-input-forms 
+        id="bpm"
+        placeholder="Ex: 120" 
+        [(ngModel)]="musica.bpm" 
+        name="bpm"
+        type="number"
+        class="form-input">
+      </app-input-forms>
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="dificuldade">Dificuldade</label>
-      <app-select-input-component
-        id="dificuldade"
-        placeholder="Selecione a dificuldade"
-        [(ngModel)]="musica.dificuldade"
-        name="dificuldade"
-        [options]="dificuldades"
-        class="form-select">
-      </app-select-input-component>
+      <label class="form-label" for="compositor">Compositor</label>
+      <app-input-forms 
+        id="compositor"
+        placeholder="Digite o nome do compositor" 
+        [(ngModel)]="musica.compositor" 
+        name="compositor"
+        class="form-input">
+      </app-input-forms>
     </div>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label" for="versao">Versão da música</label>
-    <app-input-forms 
-      id="versao"
-      placeholder="Ex: Acústica, Original, Cover" 
-      [(ngModel)]="musica.versao" 
-      name="versao"
-      class="form-input">
-    </app-input-forms>
   </div>
 
   <div class="form-group">

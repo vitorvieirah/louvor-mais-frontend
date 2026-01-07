@@ -61,9 +61,10 @@ export class ListagemMusicasComponent implements OnInit {
 
     this.musicas = this.todasMusicas.filter(m =>
       normalizeString(m.nome.toLowerCase()).includes(termo) ||
+      normalizeString(m.artista.toLowerCase()).includes(termo) ||
       normalizeString(m.tom.toLowerCase()).includes(termo) ||
-      normalizeString(m.versao.toLowerCase()).includes(termo) ||
-      normalizeString(m.dificuldade.toLowerCase()).includes(termo)
+      normalizeString(m.clima.toLowerCase()).includes(termo) ||
+      normalizeString(m.compositor.toLowerCase()).includes(termo)
     ).sort((a, b) => a.nome.localeCompare(b.nome));
   }
 

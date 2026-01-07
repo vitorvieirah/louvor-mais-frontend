@@ -21,9 +21,11 @@ export class ModalEditarComponent implements OnInit {
   musicaEditada: Musica = {
     id_musica: '',
     nome: '',
+    artista: '',
     tom: '',
-    versao: '',
-    dificuldade: '',
+    clima: '',
+    bpm: 0,
+    compositor: '',
     link: '',
     cifra: ''
   };
@@ -55,17 +57,15 @@ export class ModalEditarComponent implements OnInit {
     { value: 'BM', label: 'Bm (Si menor)' }
   ];
 
-  dificuldades = [
-    { value: 'FACIL', label: 'Fácil' },
-    { value: 'MEDIA', label: 'Média' },
-    { value: 'DIFICIL', label: 'Difícil' }
-  ];
-
   constructor(private musicaService: MusicaService) {}
 
   ngOnInit(): void {
     // Clonar o objeto para não modificar o original diretamente
-    this.musicaEditada = { ...this.musica };
+    this.musicaEditada = {
+      ...this.musica,
+      bpm: this.musica.bpm ?? null // Use nullish coalescing to keep existing number or default to null
+    };
+
   }
 
   fechar(): void {
@@ -73,15 +73,9 @@ export class ModalEditarComponent implements OnInit {
   }
 
   salvar(): void {
-    const tomSelecionado = this.tons.find(t => t.value === this.musica.tom);
+    const tomSelecionado = this.tons.find(t => t.value === this.musicaEditada.tom);
     if (tomSelecionado) {
       this.musicaEditada.tom = tomSelecionado.value;
-    }
-
-  
-    const dificuldadeSelecionada = this.dificuldades.find(d => d.value === this.musica.dificuldade);
-    if (dificuldadeSelecionada) {
-      this.musicaEditada.dificuldade = dificuldadeSelecionada.value;
     }
 
     this.musicaService.atualizarMusica(this.musicaEditada).subscribe({

@@ -71,7 +71,11 @@ export class SelecaoMusicasComponent {
   get musicasFiltradas(): Musica[] {
     const termoNormalizado = normalizeString(this.searchTerm.toLowerCase());
     return this.musicas.filter(m =>
-      normalizeString(m.nome.toLowerCase()).includes(termoNormalizado)
+      normalizeString(m.nome.toLowerCase()).includes(termoNormalizado) ||
+      normalizeString(m.artista.toLowerCase()).includes(termoNormalizado) ||
+      normalizeString(m.tom.toLowerCase()).includes(termoNormalizado) ||
+      normalizeString(m.clima.toLowerCase()).includes(termoNormalizado) ||
+      normalizeString(m.compositor.toLowerCase()).includes(termoNormalizado)
     ).sort((a, b) => a.nome.localeCompare(b.nome));
   }
 }
