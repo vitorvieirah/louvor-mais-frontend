@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterModule, Routes } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get('https://sua-api-no-render.onrender.com/ping').subscribe({
+    this.http.get('/ping').subscribe({
       next: () => console.log('API acordada!'),
       error: err => console.error('Erro ao acordar a API:', err)
     });

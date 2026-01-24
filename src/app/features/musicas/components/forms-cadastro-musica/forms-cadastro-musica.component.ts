@@ -47,9 +47,9 @@ export class FormsCadastroMusicaComponent {
   ];
 
   climas = [
-    { value: 'CALMO', label: 'Calmo' },
+    { value: 'CALMA', label: 'Calma' },
     { value: 'ALEGRE', label: 'Alegre' },
-    { value: 'ANIMADO', label: 'Animado' }
+    { value: 'ANIMADA', label: 'Animada' }
   ];
 
   musica: Musica = {

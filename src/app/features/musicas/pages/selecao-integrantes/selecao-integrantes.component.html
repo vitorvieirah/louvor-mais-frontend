@@ -2,18 +2,19 @@
   <header class="header">
     <div class="header-content">
       <app-botao-voltar></app-botao-voltar>
-      <h2 class="header-title">Folgas</h2>
-      <div class="selection-counter" *ngIf="selectedIntegrante.length > 0">
-        {{ selectedIntegrante.length }} selecionado{{ selectedIntegrante.length > 1 ? 's' : '' }}
-      </div>
+      <h2 class="header-title">Escolha o {{ currentFuncao.label }} ({{ currentStepIndex + 1 }}/{{ funcoes.length }})</h2>
     </div>
-    <button 
-      class="proximo" 
-      [disabled]="selectedIntegrante.length === 0" 
-      (click)="irParaMontagem()"
-      [class.pulse]="selectedIntegrante.length > 0">
-      <span class="button-text">Próximo</span>
-    </button>
+    <div class="step-navigation">
+      <button class="voltar" (click)="previousStep()" [disabled]="currentStepIndex === 0">
+        <span class="button-text">Voltar</span>
+      </button>
+      <button
+        class="proximo"
+        (click)="nextStep()"
+        [class.pulse]="selectedIntegrantesByFuncao[currentFuncao.value]">
+        <span class="button-text">{{ currentStepIndex === funcoes.length - 1 ? 'Finalizar' : 'Próximo' }}</span>
+      </button>
+    </div>
   </header>
 
   <div class="search-container">
@@ -34,21 +35,21 @@
   </div>
 
   <div class="musicas-grid">
-    <div 
-      *ngFor="let integrante of integrantesFiltrados" 
-      class="musica-card" 
-      [class.selected]="isSelecionada(integrante)"
-      (click)="toggleSelecao(integrante)">
-      
+    <div
+      *ngFor="let integrante of integrantesDisponiveisParaFuncaoAtual"
+      class="musica-card"
+      [class.selected]="isIntegranteCurrentlySelected(integrante)"
+      (click)="selectIntegrante(integrante)">
+
       <div class="card-header">
         <div class="integrante-info">
           <h3>{{ integrante.nome }}</h3>
         </div>
-        <div class="selection-indicator" [class.active]="isSelecionada(integrante)">
+        <div class="selection-indicator" [class.active]="isIntegranteCurrentlySelected(integrante)">
           <span class="checkmark">✓</span>
         </div>
       </div>
-      
+
       <div class="integrante-details">
         <p><strong>Função:</strong> <span class="funcao-badge">{{ integrante.funcao }}</span></p>
         <p><strong>Descrição função:</strong> {{ integrante.descricaoFuncao }}</p>
@@ -56,7 +57,7 @@
     </div>
   </div>
 
-  <div class="empty-state" *ngIf="integrantesFiltrados.length === 0">
+  <div class="empty-state" *ngIf="integrantesDisponiveisParaFuncaoAtual.length === 0">
     <div class="empty-icon">👥</div>
     <h3>Nenhum integrante encontrado</h3>
     <p>Tente ajustar sua busca</p>

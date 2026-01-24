@@ -14,10 +14,10 @@ export class IntegranteService {
 
     private readonly URL_API = `${environment.apiUrl}/integrantes`;
 
-    listar(): Observable<ResponseDto<Paginacao<Integrante>>> {
+    listar(page: number, limit: number): Observable<ResponseDto<Paginacao<Integrante>>> {
         const params = new HttpParams()
-            .set('page', '0')
-            .set('limit', '20');
+            .set('page', page.toString())
+            .set('limit', limit.toString());
 
         return this.http.get<ResponseDto<Paginacao<Integrante>>>(this.URL_API, { params });
     }

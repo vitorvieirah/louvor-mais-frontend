@@ -30,6 +30,38 @@
   box-shadow: 0 2px 4px rgba(30, 41, 59, 0.05);
 }
 
+.step-navigation {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.voltar {
+  background: #E2E8F0;
+  color: #334155;
+  border: none;
+  padding: 12px 24px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(30, 41, 59, 0.1);
+}
+
+.voltar:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(30, 41, 59, 0.2);
+  background: #CBD5E1;
+}
+
+.voltar:disabled {
+  background: #F1F5F9;
+  color: #94A3B8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(100, 116, 139, 0.1);
+}
+
 .header-content {
   display: flex;
   flex-direction: column;

@@ -65,7 +65,7 @@ export class SelecaoMusicasComponent {
 
   irParaMontagem(): void {
     this.setlistService.setMusicas(this.selectedMusicas);
-    this.router.navigate(['/integrantes-setlist']);
+    this.router.navigate(['/resumo-setlist']);
   }
 
   get musicasFiltradas(): Musica[] {
