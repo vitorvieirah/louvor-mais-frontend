@@ -1,0 +1,132 @@
+src/app/features/musicas/pages/resumo-setlist/resumo-setlist.component.ts:15:15:
+      15 │   templateUrl: './resumo-setlist.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Application bundle generation failed. [0.189 seconds]    
+
+X [ERROR] NG8001: 'app-botao-voltar' is not a known element:
+1. If 'app-botao-voltar' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'app-botao-voltar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message. [plugin angular-compiler]
+
+    src/app/features/musicas/pages/resumo-setlist/resumo-setlist.component.html:4:6:
+      4 │       <app-botao-voltar></app-botao-voltar>    
+        ╵       ~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component ResumoSetlistComponent.
+
+    src/app/features/musicas/pages/resumo-setlist/resumo-setlist.component.ts:15:15:
+      15 │   templateUrl: './resumo-setlist.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Application bundle generation failed. [0.265 seconds]    
+
+X [ERROR] NG8001: 'app-botao-voltar' is not a known element:
+1. If 'app-botao-voltar' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'app-botao-voltar' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message. [plugin angular-compiler]
+
+    src/app/features/musicas/pages/resumo-setlist/resumo-setlist.component.html:4:6:
+      4 │       <app-botao-voltar></app-botao-voltar>    
+        ╵       ~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component ResumoSetlistComponent.
+
+    src/app/features/musicas/pages/resumo-setlist/resumo-setlist.component.ts:15:15:
+      15 │   templateUrl: './resumo-setlist.component.html',
+         ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Initial chunk files | Names                     |  Raw size
+main.js             | main                      | 172.48 kB | 
+polyfills.js        | polyfills                 |  90.20 kB | 
+chunk-DH7VTVCU.js   | -                         |   6.35 kB | 
+styles.css          | styles                    | 280 bytes | 
+
+                    | Initial total             | 269.31 kB
+
+Lazy chunk files    | Names                     |  Raw size
+chunk-2CPF6EVL.js   | selecao-musicas-component |  19.92 kB | 
+
+Application bundle generation complete. [0.226 seconds]  
+
+Page reload sent to client(s).
+C:\REPOSITÓRIOS\louvor-mais-frontend>
+ *  History restored 
+
+Microsoft Windows [versão 10.0.26100.7462]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\REPOSITÓRIOS\louvor-mais-frontend>ng serve
+Application bundle generation failed. [3.121 seconds]
+
+▲ [WARNING] NG8103: The `*ngIf` directive was used in the template, but neither the `NgIf` directive nor the `CommonModule` was imported. Use Angular's built-in control flow @if or make sure that either the `NgIf` directive or the `CommonModule` is included in the `@Component.imports` array of this component. [plugin angular-compiler]
+
+    src/app/features/musicas/components/musica/musica.component.html:17:31:
+      17 │       <span class="meta-text" *ngIf="dados.bpm">BPM: {{ dados.bpm ...
+         ╵                                ~~~~
+
+  Error occurs in the template of component MusicaComponent.
+
+    src/app/features/musicas/components/musica/musica.component.ts:8:15:
+      8 │   templateUrl: './musica.component.html',      
+        ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~       
+
+
+▲ [WARNING] NG8103: The `*ngIf` directive was used in the template, but neither the `NgIf` directive nor the `CommonModule` was imported. Use Angular's built-in control flow @if or make sure that either the `NgIf` directive or the `CommonModule` is included in the `@Component.imports` array of this component. [plugin angular-compiler]      
+
+    src/app/features/musicas/components/musica/musica.component.html:18:31:
+      18 │       <span class="meta-text" *ngIf="dados.compositor">Compositor:...
+         ╵                                ~~~~
+
+  Error occurs in the template of component MusicaComponent.
+
+    src/app/features/musicas/components/musica/musica.component.ts:8:15:
+      8 │   templateUrl: './musica.component.html',      
+        ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~       
+
+
+    src/app/features/musicas/pages/menu/menu.component.ts:75:25:
+      75 │       `- ${m.nome} - ${m.versao} // TOM ${m.tom.toUpperCase()}`
+         ╵                          ~~~~~~
+
+
+Watch mode enabled. Watching for file changes...
+
+C:\REPOSITÓRIOS\louvor-mais-frontend>ng serve
+Application bundle generation failed. [2.433 seconds]
+
+▲ [WARNING] NG8103: The `*ngIf` directive was used in the template, but neither the `NgIf` directive nor the `CommonModule` was imported. Use Angular's built-in control flow @if or make sure that either the `NgIf` directive or the `CommonModule` is included in the `@Component.imports` array of this component. [plugin angular-compiler]
+
+    src/app/features/musicas/components/musica/musica.component.html:17:31:
+      17 │       <span class="meta-text" *ngIf="dados.bpm">BPM: {{ dados.bpm ...
+         ╵                                ~~~~
+
+  Error occurs in the template of component MusicaComponent.
+
+    src/app/features/musicas/components/musica/musica.component.ts:8:15:
+      8 │   templateUrl: './musica.component.html',
+        ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+▲ [WARNING] NG8103: The `*ngIf` directive was used in the template, but neither the `NgIf` directive nor the `CommonModule` was imported. Use Angular's built-in control flow @if or make sure that either the `NgIf` directive or the `CommonModule` is included in the `@Component.imports` array of this component. [plugin angular-compiler]
+
+    src/app/features/musicas/components/musica/musica.component.html:18:31:
+      18 │       <span class="meta-text" *ngIf="dados.compositor">Compositor:...
+         ╵                                ~~~~
+
+  Error occurs in the template of component MusicaComponent.
+
+    src/app/features/musicas/components/musica/musica.component.ts:8:15:
+      8 │   templateUrl: './musica.component.html',
+        ╵                ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] TS2339: Property 'versao' does not exist on type 'Musica'. [plugin angular-compiler]
+
+    src/app/features/musicas/pages/menu/menu.component.ts:75:25:
+      75 │       `- ${m.nome} - ${m.versao} // TOM ${m.tom.toUpperCase()}`
+         ╵                          ~~~~~~
+
+
+Watch mode enabled. Watching for file changes...
