@@ -7,17 +7,17 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Setlist } from '../../models/setlist';
 import { IntegranteService } from '../../services/musico.service';
+import { BotaoVoltarComponent } from "../../components/botao-voltar/botao-voltar.component";
 
 @Component({
   selector: 'app-resumo-setlist',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BotaoVoltarComponent],
   templateUrl: './resumo-setlist.component.html',
   styleUrl: './resumo-setlist.component.scss'
 })
 export class ResumoSetlistComponent {
   musicas: Musica[] = [];
-  folgas: Integrante[] = [];
   escalados: Integrante[] = [];
   dataSelecionada: string = '';
 
@@ -29,21 +29,7 @@ export class ResumoSetlistComponent {
 
   ngOnInit(): void {
     this.musicas = this.setlistService.getMusicas();
-    this.folgas = this.setlistService.getIntegrantes();
-    this.carregarTodosIntegrantes();
-  }
-
-  carregarTodosIntegrantes(): void {
-    this.integranteService.listar().subscribe({
-      next: (res) => {
-        this.escalados = res.dado.content.filter(
-          i => !this.folgas.some(integrante => integrante.id_integrante === i.id_integrante)
-        );
-      },
-      error: (err) => {
-        console.error('Erro ao buscar integrantes', err);
-      }
-    });
+    this.escalados = this.setlistService.getIntegrantesEscalados();
   }
 
   cancelar(): void {
@@ -56,13 +42,10 @@ export class ResumoSetlistComponent {
       id_setlist: '',
       data: this.dataSelecionada,
       musicas: this.musicas,
-      folgas: this.folgas,
-      escalados: this.escalados
+      escalados: this.escalados,
+      folgas: []
     };
 
-    console.log('Todos integrantes', this.escalados);
-    console.log('Folgas: ', this.folgas);
-    console.log('Escala: ', this.escalados.filter(i => !this.folgas.includes(i)));
     console.log('Setlist', setlistData);
 
 

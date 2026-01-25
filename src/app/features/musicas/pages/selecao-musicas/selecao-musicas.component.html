@@ -1,6 +1,7 @@
 <section class="container">
     <header class="header">
         <div class="header-content">
+            <app-botao-voltar></app-botao-voltar>
             <h2 class="header-title">Músicas</h2>
             <div class="selection-counter" *ngIf="selectedMusicas.length > 0">
                 {{ selectedMusicas.length }} selecionada{{ selectedMusicas.length > 1 ? 's' : '' }}
@@ -27,6 +28,7 @@
 
             <div class="card-header">
                 <h3 class="musica-nome">{{ musica?.nome || 'Sem nome' }}</h3>
+                <p class="musica-artista">{{ musica?.artista || 'Artista desconhecido' }}</p>
                 <div class="selection-indicator" [class.active]="isSelecionada(musica)">
                     <span class="checkmark">✓</span>
                 </div>
@@ -38,15 +40,16 @@
                     <span class="detail-value tom-badge">{{ musica?.tom || '-' }}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Versão:</span>
-                    <span class="detail-value">{{ musica?.versao || '-' }}</span>
+                    <span class="detail-label">Clima:</span>
+                    <span class="detail-value">{{ musica?.clima || '-' }}</span>
                 </div>
-                <div class="detail-item" *ngIf="musica?.dificuldade">
-                    <span class="detail-label">Dificuldade:</span>
-                    <span *ngIf="musica?.dificuldade" class="detail-value difficulty-badge"
-                        [attr.data-difficulty]="musica.dificuldade.toLowerCase()">
-                        {{ musica?.dificuldade }}
-                    </span>
+                <div class="detail-item" *ngIf="musica?.bpm">
+                    <span class="detail-label">BPM:</span>
+                    <span class="detail-value">{{ musica?.bpm }}</span>
+                </div>
+                <div class="detail-item" *ngIf="musica?.compositor">
+                    <span class="detail-label">Compositor:</span>
+                    <span class="detail-value">{{ musica?.compositor }}</span>
                 </div>
             </div>
         </div>

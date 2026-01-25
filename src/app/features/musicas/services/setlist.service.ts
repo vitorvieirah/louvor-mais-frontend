@@ -14,7 +14,7 @@ export class SetlistService {
     constructor(private http: HttpClient) { }
     
     private musicasSelecionadas: Musica[] = [];
-    private integrantesSelecionados: Integrante[] = [];
+    private integrantesSelecionadosPorFuncao: { [key: string]: Integrante[] } = {};
 
     private readonly URL_API = 'https://louvor-mais-backend.onrender.com/setlists';
 
@@ -22,21 +22,21 @@ export class SetlistService {
         this.musicasSelecionadas = musicas;
     }
 
-    setIntegrantes(integrantes: Integrante[]) {
-        this.integrantesSelecionados = integrantes;
+    setIntegrantesPorFuncao(integrantesPorFuncao: { [key: string]: Integrante[] }) {
+        this.integrantesSelecionadosPorFuncao = integrantesPorFuncao;
     }
 
     getMusicas(): Musica[] {
         return this.musicasSelecionadas;
     }
 
-    getIntegrantes(): Integrante[] {
-        return this.integrantesSelecionados;
+    getIntegrantesEscalados(): Integrante[] {
+        return Object.values(this.integrantesSelecionadosPorFuncao).flat();
     }
 
     reset() {
         this.musicasSelecionadas = [];
-        this.integrantesSelecionados = [];
+        this.integrantesSelecionadosPorFuncao = {};
     }
 
 

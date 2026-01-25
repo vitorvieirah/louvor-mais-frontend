@@ -1,10 +1,11 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Musica } from '../../models/musica.model';
 
 @Component({
   selector: 'app-musica',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './musica.component.html',
   styleUrl: './musica.component.scss'
 })

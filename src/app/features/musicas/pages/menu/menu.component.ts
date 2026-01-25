@@ -40,7 +40,7 @@ export class MenuComponent {
   }
 
   criarSetlist(): void {
-    this.router.navigate(['/musicas-setlist']);
+    this.router.navigate(['/integrantes-setlist']);
   }
 
   irParaMusicas(): void {
@@ -67,18 +67,13 @@ export class MenuComponent {
     console.log(setlist);
     const dataFormatada = new Date(setlist.data).toLocaleDateString('pt-BR');
 
-    const folgas = setlist.folgas.map(f => `- ${f.nome}`).join('\n') || 'Nenhuma';
-
     const escala = this.getEscala(setlist) || 'Nenhum integrante na escala';
 
     const musicas = setlist.musicas.map(m =>
-      `- ${m.nome} - ${m.versao} // TOM ${m.tom.toUpperCase()}`
+      `- ${m.nome} - ${m.artista} // TOM ${m.tom.toUpperCase()}`
     ).join('\n\n') || 'Nenhuma música adicionada';
 
     const texto = `Culto de Domingo - ${dataFormatada}
-
-FOLGAS:
-${folgas}
 
 ESCALA:
 ${escala}

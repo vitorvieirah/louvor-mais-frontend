@@ -9,6 +9,10 @@ import { CommonModule, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+function normalizeString(str: string): string {
+  return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+}
+
 @Component({
   selector: 'app-listagem-musicas-component',
   standalone: true,
@@ -17,6 +21,7 @@ import { Router } from '@angular/router';
   templateUrl: './listagem-musicas-component.component.html',
   styleUrl: './listagem-musicas-component.component.scss'
 })
+
 export class ListagemMusicasComponent implements OnInit {
   musicas: Musica[] = [];
   todasMusicas: Musica[] = [];
@@ -35,7 +40,7 @@ export class ListagemMusicasComponent implements OnInit {
     this.musicaService.listar().subscribe({
       next: (res) => {
         this.todasMusicas = res.dado.content;
-        this.musicas = [...this.todasMusicas];
+        this.musicas = [...this.todasMusicas].sort((a, b) => a.nome.localeCompare(b.nome));
         this.carregando = false;
       },
       error: (err) => {
@@ -51,15 +56,16 @@ export class ListagemMusicasComponent implements OnInit {
   }
 
   filtrarMusicas(texto: string) {
-    const termo = texto.trim().toLowerCase();
+    const termo = normalizeString(texto.trim().toLowerCase());
     this.pesquisando = termo.length > 0;
 
     this.musicas = this.todasMusicas.filter(m =>
-      m.nome.toLowerCase().includes(termo) ||
-      m.tom.toLowerCase().includes(termo) ||
-      m.versao.toLowerCase().includes(termo) ||
-      m.dificuldade.toLowerCase().includes(termo)
-    );
+      normalizeString(m.nome.toLowerCase()).includes(termo) ||
+      normalizeString(m.artista.toLowerCase()).includes(termo) ||
+      normalizeString(m.tom.toLowerCase()).includes(termo) ||
+      normalizeString(m.clima.toLowerCase()).includes(termo) ||
+      normalizeString(m.compositor.toLowerCase()).includes(termo)
+    ).sort((a, b) => a.nome.localeCompare(b.nome));
   }
 
   telaCriar() {

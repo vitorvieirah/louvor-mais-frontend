@@ -5,11 +5,16 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SetlistService } from '../../services/setlist.service';
 import { FormsModule } from '@angular/forms';
+import { BotaoVoltarComponent } from "../../components/botao-voltar/botao-voltar.component";
+
+function normalizeString(str: string): string {
+  return str.normalize("NFD").replace(/\p{Diacritic}/gu, "");
+}
 
 @Component({
   selector: 'app-selecao-musicas',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BotaoVoltarComponent],
   templateUrl: './selecao-musicas.component.html',
   styleUrl: './selecao-musicas.component.scss',
 })
@@ -35,7 +40,7 @@ export class SelecaoMusicasComponent {
     this.musicaService.listar().subscribe({
       next: (res) => {
         this.todasMusicas = res.dado.content;
-        this.musicas = [...this.todasMusicas];
+        this.musicas = [...this.todasMusicas].sort((a, b) => a.nome.localeCompare(b.nome));
         this.carregando = false;
       },
       error: (err) => {
@@ -60,12 +65,17 @@ export class SelecaoMusicasComponent {
 
   irParaMontagem(): void {
     this.setlistService.setMusicas(this.selectedMusicas);
-    this.router.navigate(['/integrantes-setlist']);
+    this.router.navigate(['/resumo-setlist']);
   }
 
   get musicasFiltradas(): Musica[] {
+    const termoNormalizado = normalizeString(this.searchTerm.toLowerCase());
     return this.musicas.filter(m =>
-      m.nome.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+      normalizeString(m.nome.toLowerCase()).includes(termoNormalizado) ||
+      normalizeString(m.artista.toLowerCase()).includes(termoNormalizado) ||
+      normalizeString(m.tom.toLowerCase()).includes(termoNormalizado) ||
+      normalizeString(m.clima.toLowerCase()).includes(termoNormalizado) ||
+      normalizeString(m.compositor.toLowerCase()).includes(termoNormalizado)
+    ).sort((a, b) => a.nome.localeCompare(b.nome));
   }
 }
