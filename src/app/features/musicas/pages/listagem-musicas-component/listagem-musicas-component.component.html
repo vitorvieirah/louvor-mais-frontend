@@ -43,6 +43,13 @@
         class="music-card-wrapper">
       </app-musica>
     </div>
+
+    <!-- Controles de Paginação -->
+    <div class="pagination-controls" *ngIf="totalPages > 1">
+      <button class="btn-pagination" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Anterior</button>
+      <span class="page-info">Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+      <button class="btn-pagination" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages - 1">Próxima</button>
+    </div>
   </main>
 
   <!-- Notificação modernizada -->

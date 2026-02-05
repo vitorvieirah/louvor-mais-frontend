@@ -23,7 +23,11 @@ export class SelecaoMusicasComponent {
   selectedMusicas: Musica[] = [];
   searchTerm: string = '';
   carregando = false;
-  todasMusicas: Musica[] = [];
+
+  // Propriedades de paginação
+  currentPage: number = 0;
+  itemsPerPage: number = 10;
+  totalPages: number = 0;
 
   constructor(
     private musicaService: MusicaService,
@@ -37,10 +41,10 @@ export class SelecaoMusicasComponent {
 
   carregarMusicas(): void {
     this.carregando = true;
-    this.musicaService.listar().subscribe({
+    this.musicaService.listar(this.currentPage, this.itemsPerPage, this.searchTerm).subscribe({
       next: (res) => {
-        this.todasMusicas = res.dado.content;
-        this.musicas = [...this.todasMusicas].sort((a, b) => a.nome.localeCompare(b.nome));
+        this.musicas = res.dado.content;
+        this.totalPages = res.dado.totalPages;
         this.carregando = false;
       },
       error: (err) => {
@@ -68,14 +72,16 @@ export class SelecaoMusicasComponent {
     this.router.navigate(['/resumo-setlist']);
   }
 
-  get musicasFiltradas(): Musica[] {
-    const termoNormalizado = normalizeString(this.searchTerm.toLowerCase());
-    return this.musicas.filter(m =>
-      normalizeString(m.nome.toLowerCase()).includes(termoNormalizado) ||
-      normalizeString(m.artista.toLowerCase()).includes(termoNormalizado) ||
-      normalizeString(m.tom.toLowerCase()).includes(termoNormalizado) ||
-      normalizeString(m.clima.toLowerCase()).includes(termoNormalizado) ||
-      normalizeString(m.compositor.toLowerCase()).includes(termoNormalizado)
-    ).sort((a, b) => a.nome.localeCompare(b.nome));
+  get paginatedMusicas(): Musica[] {
+    return this.musicas;
   }
+
+  onPageChange(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.carregarMusicas();
+    }
+  }
+
+
 }

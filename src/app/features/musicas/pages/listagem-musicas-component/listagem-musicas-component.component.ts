@@ -29,18 +29,27 @@ export class ListagemMusicasComponent implements OnInit {
   carregando = false;
   pesquisando = false;
 
+  // Propriedades de paginação
+  currentPage: number = 0;
+  itemsPerPage: number = 10;
+  totalPages: number = 0;
+  totalItems: number = 0;
+  currentSearchTerm: string = '';
+
   constructor(private musicaService: MusicaService, private router: Router) { }
 
   ngOnInit(): void {
     this.carregarMusicas();
   }
 
-  carregarMusicas(): void {
+  carregarMusicas(searchTerm: string = this.currentSearchTerm): void {
     this.carregando = true;
-    this.musicaService.listar().subscribe({
+    this.musicaService.listar(this.currentPage, this.itemsPerPage, searchTerm).subscribe({
       next: (res) => {
         this.todasMusicas = res.dado.content;
         this.musicas = [...this.todasMusicas].sort((a, b) => a.nome.localeCompare(b.nome));
+        this.totalPages = res.dado.totalPages;
+        this.totalItems = res.dado.totalItems;
         this.carregando = false;
       },
       error: (err) => {
@@ -48,6 +57,13 @@ export class ListagemMusicasComponent implements OnInit {
         this.carregando = false;
       }
     });
+  }
+
+  onPageChange(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.carregarMusicas();
+    }
   }
 
   mostrarNotificacao() {
@@ -58,14 +74,9 @@ export class ListagemMusicasComponent implements OnInit {
   filtrarMusicas(texto: string) {
     const termo = normalizeString(texto.trim().toLowerCase());
     this.pesquisando = termo.length > 0;
-
-    this.musicas = this.todasMusicas.filter(m =>
-      normalizeString(m.nome.toLowerCase()).includes(termo) ||
-      normalizeString(m.artista.toLowerCase()).includes(termo) ||
-      normalizeString(m.tom.toLowerCase()).includes(termo) ||
-      normalizeString(m.clima.toLowerCase()).includes(termo) ||
-      normalizeString(m.compositor.toLowerCase()).includes(termo)
-    ).sort((a, b) => a.nome.localeCompare(b.nome));
+    this.currentSearchTerm = termo;
+    this.currentPage = 0;
+    this.carregarMusicas(termo);
   }
 
   telaCriar() {

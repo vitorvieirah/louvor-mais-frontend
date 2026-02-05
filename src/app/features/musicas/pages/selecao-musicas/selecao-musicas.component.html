@@ -23,7 +23,7 @@
     </div>
 
     <div class="musicas-grid">
-        <div *ngFor="let musica of musicasFiltradas;" class="musica-card" [class.selected]="isSelecionada(musica)"
+        <div *ngFor="let musica of paginatedMusicas;" class="musica-card" [class.selected]="isSelecionada(musica)"
             (click)="toggleSelecao(musica)">
 
             <div class="card-header">
@@ -55,7 +55,14 @@
         </div>
     </div>
 
-    <div class="empty-state" *ngIf="musicasFiltradas.length === 0">
+    <!-- Controles de Paginação -->
+    <div class="pagination-controls" *ngIf="totalPages > 1">
+      <button class="btn-pagination" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Anterior</button>
+      <span class="page-info">Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+      <button class="btn-pagination" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages - 1">Próxima</button>
+    </div>
+
+    <div class="empty-state" *ngIf="musicas.length === 0 && !carregando">
         <div class="empty-icon">🎵</div>
         <h3>Nenhuma música encontrada</h3>
         <p>Tente ajustar sua busca ou adicione novas músicas</p>

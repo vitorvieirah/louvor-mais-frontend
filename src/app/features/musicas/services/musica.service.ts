@@ -15,10 +15,14 @@ export class MusicaService {
     private readonly URL_API = 'https://louvor-mais-backend.onrender.com/musicas';
 
 
-    listar(): Observable<ResponseDto<Paginacao<Musica>>> {
-        const params = new HttpParams()
-            .set('page', '0')
-            .set('limit', '20');
+    listar(page: number, limit: number, searchTerm?: string): Observable<ResponseDto<Paginacao<Musica>>> {
+        let params = new HttpParams()
+            .set('page', page.toString())
+            .set('limit', limit.toString());
+
+        if (searchTerm) {
+            params = params.set('searchTerm', searchTerm);
+        }
 
         return this.http.get<ResponseDto<Paginacao<Musica>>>(this.URL_API, { params });
     }
